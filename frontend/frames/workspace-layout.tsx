@@ -69,17 +69,14 @@ export function WorkspaceLayout({ title, compact, data, tools, children }: {
   </div>
 }
 
-export function Chip({ label }: { label: string }) {
-  return <span className="screen-chip" aria-hidden="true"><span /><small>{label}</small></span>
-}
-
-export function WorkspaceCard({ title, description, icon, action, primary = false }: {
-  title: string; description: string; icon: string; action: string; primary?: boolean
+export function WorkspaceCard({ title, description, artwork, action, primary = false, cornerArtwork = false }: {
+  title: string; description: string; artwork: ReactNode; action: string; primary?: boolean; cornerArtwork?: boolean
 }) {
-  return <PrototypeAction action={action} className={'screen-card' + (primary ? ' screen-card--primary' : '')}>
-    <Chip label={icon} />
+  const className = 'screen-card' + (primary ? ' screen-card--primary' : '') + (cornerArtwork ? ' screen-card--corner-artwork' : '')
+  return <PrototypeAction action={action} className={className}>
+    {artwork}
     <span className="screen-card-copy"><strong>{title}</strong><span>{description}</span></span>
-    <span className="screen-card-arrow" aria-hidden="true">→</span>
+    {!cornerArtwork && <span className="screen-card-arrow" aria-hidden="true">→</span>}
   </PrototypeAction>
 }
 

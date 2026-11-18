@@ -29,8 +29,10 @@ const titles: Record<Resource, string> = {
 const formatNumber = (value: number) => value.toLocaleString('en-US')
 const percent = (value: number) => (value * 100).toFixed(1) + '%'
 const desktopLayout = window.matchMedia('(min-width: 960px)')
-type Panel = Resource | 'batches' | 'results' | 'scope'
+type Panel = Resource | 'batches' | 'results' | 'scope' | 'reset'
 type Summary = { products: number; customers: number; demand: number; supply: number; source: string }
+type ResetCounts = { demand: number; supply: number }
+type ResetPreview = ResetCounts & { token: string }
 
 function readRoute() {
   return window.location.pathname.replace(/\/$/, '') || '/'
@@ -56,6 +58,9 @@ function App() {
   const [error, setError] = useState('')
   const [panel, setPanel] = useState<Panel>()
   const [batch, setBatch] = useState<Batch>()
+  const [resetPreview, setResetPreview] = useState<ResetPreview>()
+  const [resetError, setResetError] = useState('')
+  const [resetting, setResetting] = useState(false)
   const [summary, setSummary] = useState<Summary>()
   const [runs, setRuns] = useState<RunSummary[]>([])
   const [runId, setRunId] = useState('')
@@ -107,6 +112,16 @@ function App() {
   useEffect(() => {
     if (role && path.startsWith('/data')) readSummary().catch(failure => setError(failure.message))
   }, [path, role, readSummary])
+
+  useEffect(() => {
+    if (panel !== 'reset') return
+    const controller = new AbortController()
+    api<ResetPreview>('/data/transactions/reset', { signal: controller.signal }).then(
+      value => { if (!controller.signal.aborted) setResetPreview(value) },
+      failure => { if (!controller.signal.aborted) setResetError(failure.message) },
+    )
+    return () => controller.abort()
+  }, [panel])
 
   useEffect(() => {
     if (!role || !path.startsWith('/operations') || role === 'Data') return
@@ -224,10 +239,27 @@ function App() {
       const value = await response.json()
       if (!response.ok && response.status !== 422) throw new Error(value.error || 'Upload failed')
       setBatch(value as Batch)
-      setPanel('batches')
+      setPanel(current => current === 'reset' ? current : 'batches')
       void readSummary().catch(failure => setError(failure.message))
     } catch (failure) { setError((failure as Error).message) }
     finally { setNotice('') }
+  }
+
+  async function clearTransactions() {
+    if (!resetPreview || resetting) return
+    setResetting(true)
+    setResetError('')
+    try {
+      const cleared = await api<ResetCounts>('/data/transactions/reset', json('POST', { token: resetPreview.token }))
+      setBatch(undefined)
+      setPanel(undefined)
+      setNotice(`Cleared ${formatNumber(cleared.demand)} demand and ${formatNumber(cleared.supply)} supply rows.`)
+      void readSummary().catch(failure => setError(failure.message))
+    } catch (failure) {
+      setResetError((failure as Error).message)
+    } finally {
+      setResetting(false)
+    }
   }
 
   function layerText(key: string, sample: ReactNode) {
@@ -267,6 +299,13 @@ function App() {
       <a href="/api/uploads/demand/template">Demand template</a><a href="/api/uploads/supply/template">Supply template</a>
       <button onClick={() => setPanel('demand')}>Demand records</button><button onClick={() => setPanel('supply')}>Supply records</button>
       <button onClick={() => setPanel('batches')}>Upload history</button>
+      {role === 'Admin' && <button className="danger-action" onClick={() => {
+        setResetPreview(undefined)
+        setResetError('')
+        setError('')
+        setNotice('')
+        setPanel('reset')
+      }}>Clear Demand &amp; Supply</button>}
     </>}
     {path === '/operations/restrictions' && <button onClick={() => setPanel('restrictions')}>Allocation restrictions</button>}
     {path.startsWith('/operations') && run && <span role="status">Allocation: {run.status}{run.error ? ' · ' + run.error : ''}</span>}
@@ -294,9 +333,21 @@ function App() {
       <a href="/">Return to Home</a>
     </main>}
     {(notice || error) && <div className="notification" role={error ? 'alert' : 'status'}>{error || notice}</div>}
-    <dialog ref={dialog} aria-labelledby="panel-title" onClose={() => setPanel(undefined)}>
-      <header><h2 id="panel-title">{panel === 'batches' ? 'Upload batches' : panel === 'results' ? 'Allocation results' : panel === 'scope' ? 'Pending workflow' : panel ? titles[panel] : ''}</h2>
-        <button onClick={() => setPanel(undefined)} aria-label="Close">Close</button></header>
+    <dialog ref={dialog} aria-labelledby="panel-title" onClose={() => setPanel(undefined)}
+      onCancel={event => { if (resetting) event.preventDefault() }}>
+      <header><h2 id="panel-title">{panel === 'reset' ? 'Clear Demand & Supply?' : panel === 'batches' ? 'Upload batches' : panel === 'results' ? 'Allocation results' : panel === 'scope' ? 'Pending workflow' : panel ? titles[panel] : ''}</h2>
+        <button disabled={resetting} onClick={() => setPanel(undefined)}>{panel === 'reset' ? 'Cancel' : 'Close'}</button></header>
+      {panel === 'reset' && <>
+        {resetError && <p role="alert">{resetError}</p>}
+        {!resetPreview && !resetError && <p role="status">Checking demand and supply counts…</p>}
+        {resetPreview && (resetPreview.demand || resetPreview.supply ? <>
+          <p>Permanently remove <strong>{formatNumber(resetPreview.demand)} demand rows</strong> and <strong>{formatNumber(resetPreview.supply)} supply rows</strong>, including demo records.</p>
+          <p>Upload history and saved allocation results are preserved.</p>
+          <button className="danger-action" disabled={resetting || !!resetError} onClick={() => void clearTransactions()}>
+            {resetting ? 'Clearing…' : 'Clear All Demand & Supply'}
+          </button>
+        </> : <p>Demand and supply are already empty.</p>)}
+      </>}
       {panel === 'batches' && <BatchPanel batch={batch} />}
       {panel === 'results' && <ResultsPanel run={run} />}
       {panel === 'scope' && <p>This workflow is awaiting scope approval.</p>}

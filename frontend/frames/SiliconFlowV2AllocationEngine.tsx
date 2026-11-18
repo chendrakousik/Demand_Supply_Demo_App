@@ -1,7 +1,23 @@
+import { CardIcon } from './figma-card-icons.js'
+import { FigmaIcon } from './figma-icon.js'
 import { PrototypeAction, PrototypeText } from '../prototype-action.js'
 
 const imgPremiumFunctionalDot = '/figma/1-255-5592e.svg';
 const imgPremiumFunctionalDot1 = '/figma/1-255-9a9a7.svg';
+
+export const allocationEngineArtwork = {
+  CPU: { bounds: { x: 1279, y: 329, width: 48, height: 48 }, children: <>
+        <div className="layer-331" data-node-id="2031:222" data-name="Semiconductor icon / CPU" />
+        <div className="layer-332" data-node-id="4008:98" data-name="Premium functional dot">
+        <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
+      </div>
+        <div className="layer-333" data-node-id="4008:99" data-name="Premium functional dot">
+        <img alt="" className="layer-148" src={imgPremiumFunctionalDot1} />
+      </div>
+        <div className="layer-334" data-node-id="4008:100" data-name="Premium functional vector" />
+        <div className="layer-335" data-node-id="4008:101" data-name="Premium functional vector" />
+    </> },
+}
 
 export default function SiliconFlowV2AllocationEngine() {
   return (
@@ -68,15 +84,7 @@ export default function SiliconFlowV2AllocationEngine() {
       </p>
       <PrototypeAction action="Button / Run Allocation" className="layer-319" data-node-id="1:287" data-name="Button / Run Allocation">
         <p className="layer-320" data-node-id="1:288">{`Run Allocation  →`}</p>
-        <div className="layer-321" data-node-id="2031:232" data-name="Semiconductor icon / RUN" />
-        <div className="layer-322" data-node-id="4008:90" data-name="Premium functional vector" />
-        <div className="layer-323" data-node-id="4008:91" data-name="Premium functional vector" />
-        <div className="layer-324" data-node-id="4008:92" data-name="Premium functional vector" />
-        <div className="layer-325" data-node-id="4008:93" data-name="Premium functional vector" />
-        <div className="layer-326" data-node-id="4008:94" data-name="Premium functional vector" />
-        <div className="layer-327" data-node-id="4008:95" data-name="Premium functional vector" />
-        <div className="layer-328" data-node-id="4008:96" data-name="Premium functional vector" />
-        <div className="layer-329" data-node-id="4008:97" data-name="Premium functional vector" />
+        <CardIcon name={"AllocationEngine / Run Allocation"} attached />
       </PrototypeAction>
       <div className="layer-78" data-node-id="5:82" data-name="Side footer" />
       <p className="layer-79" data-node-id="5:83">
@@ -114,15 +122,7 @@ export default function SiliconFlowV2AllocationEngine() {
         SEMICONDUCTOR SUPPLY INTELLIGENCE
       </p>
       <div className="layer-330" data-node-id="2010:28" data-name="Premium / engine indicator" />
-      <div className="layer-331" data-node-id="2031:222" data-name="Semiconductor icon / CPU" />
-      <div className="layer-332" data-node-id="4008:98" data-name="Premium functional dot">
-        <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
-      </div>
-      <div className="layer-333" data-node-id="4008:99" data-name="Premium functional dot">
-        <img alt="" className="layer-148" src={imgPremiumFunctionalDot1} />
-      </div>
-      <div className="layer-334" data-node-id="4008:100" data-name="Premium functional vector" />
-      <div className="layer-335" data-node-id="4008:101" data-name="Premium functional vector" />
+      <FigmaIcon {...allocationEngineArtwork.CPU} owner={{ nodeId: "1:283", right: 1344 }} />
     </div>
   );
 }

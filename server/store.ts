@@ -15,6 +15,7 @@ type Write = { [K in Table]: { table: K; rows: Records[K][] } }[Table]
 export interface Store {
   read<K extends Table>(table: K): Promise<Records[K][]>
   write(writes: Write[]): Promise<void>
+  clearTransactions(batches: Batch[]): Promise<void>
 }
 
 export function createDemoStore(): Store {
@@ -35,6 +36,11 @@ export function createDemoStore(): Store {
       for (const { table, rows } of writes) {
         for (const row of rows) tableFor(table).set(row.id, structuredClone(row))
       }
+    },
+    async clearTransactions(batches) {
+      tableFor('demand').clear()
+      tableFor('supply').clear()
+      for (const batch of batches) tableFor('batches').set(batch.id, structuredClone(batch))
     },
   }
 }
@@ -80,6 +86,33 @@ export async function createSnowflakeStore(): Promise<Store> {
     return result
   }
 
+  function transaction(work: () => Promise<void>) {
+    return serialize(async () => {
+      await execute('BEGIN')
+      try {
+        await work()
+        await execute('COMMIT')
+      } catch (error) {
+        await execute('ROLLBACK')
+        throw error
+      }
+    })
+  }
+
+  async function mergeWrites(writes: Write[]) {
+    for (const { table, rows } of writes) {
+      for (let offset = 0; offset < rows.length; offset += 500) {
+        const values = JSON.stringify(rows.slice(offset, offset + 500))
+        await execute(
+          'MERGE INTO ' + tables[table] + ' target USING ' +
+          '(SELECT value:id::VARCHAR AS id, value AS payload FROM TABLE(FLATTEN(INPUT => PARSE_JSON(?)))) source ' +
+          'ON target.id = source.id WHEN MATCHED THEN UPDATE SET payload = source.payload ' +
+          'WHEN NOT MATCHED THEN INSERT (id, payload) VALUES (source.id, source.payload)', [values],
+        )
+      }
+    }
+  }
+
   await execute('SELECT 1')
   return {
     read<K extends Table>(table: K) {
@@ -87,25 +120,13 @@ export async function createSnowflakeStore(): Promise<Store> {
         .map(row => JSON.parse(row.PAYLOAD) as Records[K]))
     },
     write(writes) {
-      return serialize(async () => {
-        await execute('BEGIN')
-        try {
-          for (const { table, rows } of writes) {
-            for (let offset = 0; offset < rows.length; offset += 500) {
-              const values = JSON.stringify(rows.slice(offset, offset + 500))
-              await execute(
-                'MERGE INTO ' + tables[table] + ' target USING ' +
-                '(SELECT value:id::VARCHAR AS id, value AS payload FROM TABLE(FLATTEN(INPUT => PARSE_JSON(?)))) source ' +
-                'ON target.id = source.id WHEN MATCHED THEN UPDATE SET payload = source.payload ' +
-                'WHEN NOT MATCHED THEN INSERT (id, payload) VALUES (source.id, source.payload)', [values],
-              )
-            }
-          }
-          await execute('COMMIT')
-        } catch (error) {
-          await execute('ROLLBACK')
-          throw error
-        }
+      return transaction(() => mergeWrites(writes))
+    },
+    clearTransactions(batches) {
+      return transaction(async () => {
+        await execute('DELETE FROM ' + tables.demand)
+        await execute('DELETE FROM ' + tables.supply)
+        await mergeWrites([{ table: 'batches', rows: batches }])
       })
     },
   }

@@ -1,8 +1,53 @@
+import { FigmaIcon } from './figma-icon.js'
 import { PrototypeAction, PrototypeText } from '../prototype-action.js'
 
 const imgPremiumFunctionalDot = '/figma/1-212-8b288.svg';
 const imgPremiumFunctionalDot1 = '/figma/1-212-5592e.svg';
 const imgPremiumFunctionalDot2 = '/figma/1-212-9a9a7.svg';
+
+export const restrictionManagerArtwork = {
+  PRI: { bounds: { x: 1268, y: 320, width: 48, height: 48 }, children: <>
+        <div className="layer-291" data-node-id="2031:172" data-name="Semiconductor icon / PRI" />
+        <div className="layer-296" data-node-id="4008:72" data-name="Premium functional vector" />
+        <div className="layer-297" data-node-id="4008:73" data-name="Premium functional vector" />
+        <div className="layer-298" data-node-id="4008:74" data-name="Premium functional vector" />
+    </> },
+  WIN: { bounds: { x: 1268, y: 413, width: 48, height: 48 }, children: <>
+        <div className="layer-292" data-node-id="2031:182" data-name="Semiconductor icon / WIN" />
+        <div className="layer-299" data-node-id="4008:75" data-name="Premium functional vector" />
+        <div className="layer-300" data-node-id="4008:76" data-name="Premium functional vector" />
+        <div className="layer-301" data-node-id="4008:77" data-name="Premium functional dot">
+        <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
+      </div>
+        <div className="layer-302" data-node-id="4008:78" data-name="Premium functional dot">
+        <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
+      </div>
+    </> },
+  CAP: { bounds: { x: 1268, y: 506, width: 48, height: 48 }, children: <>
+        <div className="layer-293" data-node-id="2031:192" data-name="Semiconductor icon / CAP" />
+        <div className="layer-303" data-node-id="4008:79" data-name="Premium functional dot">
+        <img alt="" className="layer-148" src={imgPremiumFunctionalDot1} />
+      </div>
+        <div className="layer-304" data-node-id="4008:80" data-name="Premium functional dot">
+        <img alt="" className="layer-148" src={imgPremiumFunctionalDot2} />
+      </div>
+        <div className="layer-305" data-node-id="4008:81" data-name="Premium functional vector" />
+        <div className="layer-306" data-node-id="4008:82" data-name="Premium functional vector" />
+    </> },
+  LOT: { bounds: { x: 1268, y: 599, width: 48, height: 48 }, children: <>
+        <div className="layer-294" data-node-id="2031:202" data-name="Semiconductor icon / LOT" />
+        <div className="layer-307" data-node-id="4008:83" data-name="Premium functional vector" />
+        <div className="layer-308" data-node-id="4008:84" data-name="Premium functional vector" />
+        <div className="layer-309" data-node-id="4008:85" data-name="Premium functional vector" />
+        <div className="layer-310" data-node-id="4008:86" data-name="Premium functional vector" />
+        <div className="layer-311" data-node-id="4008:87" data-name="Premium functional vector" />
+    </> },
+  COM: { bounds: { x: 1268, y: 692, width: 48, height: 48 }, children: <>
+        <div className="layer-295" data-node-id="2031:212" data-name="Semiconductor icon / COM" />
+        <div className="layer-312" data-node-id="4008:88" data-name="Premium functional vector" />
+        <div className="layer-313" data-node-id="4008:89" data-name="Premium functional vector" />
+    </> },
+}
 
 export default function SiliconFlowV2RestrictionManager() {
   return (
@@ -127,37 +172,11 @@ export default function SiliconFlowV2RestrictionManager() {
       <p className="layer-94" data-node-id="2010:24">
         SEMICONDUCTOR SUPPLY INTELLIGENCE
       </p>
-      <div className="layer-291" data-node-id="2031:172" data-name="Semiconductor icon / PRI" />
-      <div className="layer-292" data-node-id="2031:182" data-name="Semiconductor icon / WIN" />
-      <div className="layer-293" data-node-id="2031:192" data-name="Semiconductor icon / CAP" />
-      <div className="layer-294" data-node-id="2031:202" data-name="Semiconductor icon / LOT" />
-      <div className="layer-295" data-node-id="2031:212" data-name="Semiconductor icon / COM" />
-      <div className="layer-296" data-node-id="4008:72" data-name="Premium functional vector" />
-      <div className="layer-297" data-node-id="4008:73" data-name="Premium functional vector" />
-      <div className="layer-298" data-node-id="4008:74" data-name="Premium functional vector" />
-      <div className="layer-299" data-node-id="4008:75" data-name="Premium functional vector" />
-      <div className="layer-300" data-node-id="4008:76" data-name="Premium functional vector" />
-      <div className="layer-301" data-node-id="4008:77" data-name="Premium functional dot">
-        <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
-      </div>
-      <div className="layer-302" data-node-id="4008:78" data-name="Premium functional dot">
-        <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
-      </div>
-      <div className="layer-303" data-node-id="4008:79" data-name="Premium functional dot">
-        <img alt="" className="layer-148" src={imgPremiumFunctionalDot1} />
-      </div>
-      <div className="layer-304" data-node-id="4008:80" data-name="Premium functional dot">
-        <img alt="" className="layer-148" src={imgPremiumFunctionalDot2} />
-      </div>
-      <div className="layer-305" data-node-id="4008:81" data-name="Premium functional vector" />
-      <div className="layer-306" data-node-id="4008:82" data-name="Premium functional vector" />
-      <div className="layer-307" data-node-id="4008:83" data-name="Premium functional vector" />
-      <div className="layer-308" data-node-id="4008:84" data-name="Premium functional vector" />
-      <div className="layer-309" data-node-id="4008:85" data-name="Premium functional vector" />
-      <div className="layer-310" data-node-id="4008:86" data-name="Premium functional vector" />
-      <div className="layer-311" data-node-id="4008:87" data-name="Premium functional vector" />
-      <div className="layer-312" data-node-id="4008:88" data-name="Premium functional vector" />
-      <div className="layer-313" data-node-id="4008:89" data-name="Premium functional vector" />
+      <FigmaIcon {...restrictionManagerArtwork.PRI} owner={{ nodeId: "1:240", right: 1333 }} />
+      <FigmaIcon {...restrictionManagerArtwork.WIN} owner={{ nodeId: "1:243", right: 1333 }} />
+      <FigmaIcon {...restrictionManagerArtwork.CAP} owner={{ nodeId: "1:246", right: 1333 }} />
+      <FigmaIcon {...restrictionManagerArtwork.LOT} owner={{ nodeId: "1:249", right: 1333 }} />
+      <FigmaIcon {...restrictionManagerArtwork.COM} owner={{ nodeId: "1:252", right: 1333 }} />
     </div>
   );
 }

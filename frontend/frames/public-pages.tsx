@@ -1,5 +1,7 @@
 import { PrototypeAction, PrototypeField, PrototypeText } from '../prototype-action.js'
-import { Brand, Chip, WorkspaceCard } from './workspace-layout.js'
+import { Brand, WorkspaceCard } from './workspace-layout.js'
+import { CardIcon } from './figma-card-icons.js'
+import { SignInArtwork, SignInProviderIcon } from './figma-sign-in-artwork.js'
 
 export function Home() {
   return <main className="public-layout home-layout">
@@ -25,9 +27,9 @@ export function Home() {
         <h2>Choose your workspace</h2>
         <div className="screen-card-grid">
           <WorkspaceCard title="Data Management" description="Maintain product, customer and planning data"
-            action="Button / Data Management" icon="DM" />
+            action="Button / Data Management" artwork={<CardIcon name="Home / Data Management" />} />
           <WorkspaceCard title="Supply Chain Operations" description="Plan supply, run allocations and review performance"
-            action="Button / Supply Chain Operations" icon="OPS" />
+            action="Button / Supply Chain Operations" artwork={<CardIcon name="Home / Supply Chain Operations" />} />
         </div>
       </section>
     </div>
@@ -43,7 +45,7 @@ export function SignIn() {
         <h1>Precision planning.<br />Confident decisions.</h1>
         <p>One connected workspace for data, allocation and supply-chain performance.</p>
       </div>
-      <div className="sign-in-art" aria-hidden="true"><Chip label="CPU" /></div>
+      <div className="sign-in-art"><SignInArtwork /></div>
     </section>
     <section className="sign-in-content" aria-labelledby="sign-in-title">
       <div className="sign-in-form">
@@ -61,8 +63,8 @@ export function SignIn() {
         <PrototypeAction action="Button / Sign in" className="screen-button screen-button--primary">Sign in →</PrototypeAction>
         <p className="screen-subtitle sign-in-divider">or continue with</p>
         <div className="sign-in-providers">
-          <PrototypeAction action="Button / Google sign in" className="screen-button">Google</PrototypeAction>
-          <PrototypeAction action="Button / Microsoft sign in" className="screen-button">Microsoft</PrototypeAction>
+          <PrototypeAction action="Button / Google sign in" className="screen-button"><SignInProviderIcon provider="google" />Google</PrototypeAction>
+          <PrototypeAction action="Button / Microsoft sign in" className="screen-button"><SignInProviderIcon provider="microsoft" />Microsoft</PrototypeAction>
         </div>
         <PrototypeText value="sign-in-note" className="screen-subtitle">Demo sign-in — authentication is simulated in this prototype.</PrototypeText>
       </div>
@@ -72,10 +74,10 @@ export function SignIn() {
 
 export function SelectRole() {
   const roles = [
-    ['Admin', 'All modules + administration', 'ADM'],
-    ['Data', 'Master data and transaction uploads', 'DATA'],
-    ['Planner', 'Supply operations and allocation tools', 'PLAN'],
-    ['Business Analyst', 'Allocation results and reporting', 'BA'],
+    ['Admin', 'All modules + administration'],
+    ['Data', 'Master data and transaction uploads'],
+    ['Planner', 'Supply operations and allocation tools'],
+    ['Business Analyst', 'Allocation results and reporting'],
   ] as const
   return <main className="public-layout role-layout">
     <header className="public-header"><Brand /></header>
@@ -83,8 +85,8 @@ export function SelectRole() {
       <PrototypeText value="current-role" className="role-heading">Current role</PrototypeText>
       <p className="screen-subtitle">Select an assigned role below to change the permissions for this session.</p>
       <div className="screen-card-grid">
-        {roles.map(([title, description, icon]) => <WorkspaceCard key={title} title={title} description={description}
-          action={'Role / ' + title} icon={icon} />)}
+        {roles.map(([title, description]) => <WorkspaceCard key={title} title={title} description={description}
+          action={'Role / ' + title} artwork={<CardIcon name={`SelectRole / ${title}`} />} />)}
       </div>
       <div className="screen-actions">
         <PrototypeAction action="Back Home" className="screen-button">← Home</PrototypeAction>

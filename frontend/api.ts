@@ -3,6 +3,7 @@ export type Session = { name: string; roles: Role[]; role: Role }
 export type Batch = {
   id: string; type: string; status: string; accepted: number; rejected: number
   errors: { row: number; message: string }[]
+  clearedAt?: string
 }
 export type RunSummary = { id: string; status: 'queued' | 'running' | 'completed' | 'failed'; createdAt: string; error?: string }
 export type Run = RunSummary & {

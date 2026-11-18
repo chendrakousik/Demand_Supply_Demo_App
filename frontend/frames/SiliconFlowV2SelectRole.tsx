@@ -1,3 +1,4 @@
+import { CardIcon } from './figma-card-icons.js'
 import { PrototypeAction, PrototypeText } from '../prototype-action.js'
 
 export default function SiliconFlowV2SelectRole() {
@@ -19,11 +20,7 @@ export default function SiliconFlowV2SelectRole() {
         <p className="layer-440" data-node-id="13:8">
           All modules + administration
         </p>
-        <div className="layer-441" data-node-id="4014:2" data-name="Premium / role icon tile" />
-        <div className="layer-442" data-node-id="4014:3" data-name="Premium / role pictogram" />
-        <div className="layer-443" data-node-id="4014:4" data-name="Premium / role pictogram" />
-        <div className="layer-444" data-node-id="4014:5" data-name="Premium / role pictogram" />
-        <div className="layer-445" data-node-id="4014:6" data-name="Premium / role pictogram" />
+        <CardIcon name={"SelectRole / Admin"} attached />
         <div className="layer-446" data-node-id="4014:7" data-name="Premium / role accent" />
         <div className="layer-447" data-node-id="4014:8" data-name="Premium / role CTA tile" />
         <p className="layer-448" data-node-id="4014:9">
@@ -37,10 +34,7 @@ export default function SiliconFlowV2SelectRole() {
         <p className="layer-440" data-node-id="13:12">
           Master data and transaction uploads
         </p>
-        <div className="layer-441" data-node-id="4014:10" data-name="Premium / role icon tile" />
-        <div className="layer-450" data-node-id="4014:11" data-name="Premium / role pictogram" />
-        <div className="layer-451" data-node-id="4014:12" data-name="Premium / role pictogram" />
-        <div className="layer-452" data-node-id="4014:13" data-name="Premium / role pictogram" />
+        <CardIcon name={"SelectRole / Data"} attached />
         <div className="layer-446" data-node-id="4014:14" data-name="Premium / role accent" />
         <div className="layer-447" data-node-id="4014:15" data-name="Premium / role CTA tile" />
         <p className="layer-448" data-node-id="4014:16">
@@ -54,10 +48,7 @@ export default function SiliconFlowV2SelectRole() {
         <p className="layer-455" data-node-id="13:16">
           Supply operations and allocation tools
         </p>
-        <div className="layer-456" data-node-id="4014:17" data-name="Premium / role icon tile" />
-        <div className="layer-457" data-node-id="4014:18" data-name="Premium / role pictogram" />
-        <div className="layer-458" data-node-id="4014:19" data-name="Premium / role pictogram" />
-        <div className="layer-459" data-node-id="4014:20" data-name="Premium / role pictogram" />
+        <CardIcon name={"SelectRole / Planner"} attached />
         <div className="layer-460" data-node-id="4014:21" data-name="Premium / role accent" />
         <div className="layer-461" data-node-id="4014:22" data-name="Premium / role CTA tile" />
         <p className="layer-462" data-node-id="4014:23">
@@ -71,10 +62,7 @@ export default function SiliconFlowV2SelectRole() {
         <p className="layer-440" data-node-id="13:20">
           Allocation results and reporting
         </p>
-        <div className="layer-441" data-node-id="4014:24" data-name="Premium / role icon tile" />
-        <div className="layer-464" data-node-id="4014:25" data-name="Premium / role pictogram" />
-        <div className="layer-465" data-node-id="4014:26" data-name="Premium / role pictogram" />
-        <div className="layer-466" data-node-id="4014:27" data-name="Premium / role pictogram" />
+        <CardIcon name={"SelectRole / Business Analyst"} attached />
         <div className="layer-446" data-node-id="4014:28" data-name="Premium / role accent" />
         <div className="layer-447" data-node-id="4014:29" data-name="Premium / role CTA tile" />
         <p className="layer-448" data-node-id="4014:30">

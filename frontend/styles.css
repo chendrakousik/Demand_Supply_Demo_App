@@ -1,3 +1,13 @@
+/* The Latin web subset omits the horizontal arrows used in the Figma controls. */
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/Inter-Bold.woff2') format('woff2');
+  unicode-range: U+2190, U+2192;
+}
+
 * { box-sizing: border-box; }
 body { margin: 0; background: #f3f8fc; color: #14334a; font: 16px Inter, sans-serif; }
 p { margin: 0; }
@@ -10,6 +20,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .workspace-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; min-width: 0; max-height: 34dvh; overflow: auto; padding: 12px 24px; border-top: 1px solid #d3e3ed; font-size: 14px; }
 .workspace-tools a { color: #006b80; }
 .workspace-tools button, dialog button { border: 1px solid #c8dae5; border-radius: 7px; background: white; color: #14334a; padding: 5px 10px; }
+.workspace-tools .danger-action, dialog .danger-action { border-color: #b45350; color: #942a27; }
+dialog .danger-action:not(:disabled) { background: #942a27; color: white; }
 .notification { position: fixed; z-index: 1; bottom: 20px; right: 20px; padding: 14px 20px; max-width: min(450px, calc(100vw - 40px)); background: #14334a; color: white; border-radius: 9px; }
 .route-message { min-height: 100dvh; padding: clamp(20px, 5vw, 64px); }
 dialog { width: min(950px, 94vw); max-height: 85vh; border: 1px solid #c8dae5; border-radius: 16px; padding: 24px; color: #14334a; }

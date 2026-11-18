@@ -1,3 +1,4 @@
+import { CardIcon } from './figma-card-icons.js'
 import { PrototypeAction, PrototypeText } from '../prototype-action.js'
 
 const imgPremiumSemiconductorPhotography = '/figma/1-128-adc58.png';
@@ -60,15 +61,7 @@ export default function SiliconFlowV2SupplyChainOperations() {
       </p>
       <PrototypeAction action="Button / Operations Dashboard" className="layer-204" data-node-id="1:157" data-name="Button / Operations Dashboard">
         <p className="layer-205" data-node-id="1:158">{`Operations Dashboard  →`}</p>
-        <div className="layer-206" data-node-id="2025:48" data-name="Semiconductor / icon tile" />
-        <div className="layer-207" data-node-id="2025:49" data-name="Semiconductor / integrated circuit" />
-        <div className="layer-208" data-node-id="2025:50" data-name="Semiconductor / circuitry core" />
-        <div className="layer-209" data-node-id="2025:51" data-name="Semiconductor / upper pin" />
-        <div className="layer-210" data-node-id="2025:52" data-name="Semiconductor / lower pin" />
-        <div className="layer-211" data-node-id="2025:53" data-name="Semiconductor / upper pin" />
-        <div className="layer-212" data-node-id="2025:54" data-name="Semiconductor / lower pin" />
-        <div className="layer-213" data-node-id="2025:55" data-name="Semiconductor / upper pin" />
-        <div className="layer-214" data-node-id="2025:56" data-name="Semiconductor / lower pin" />
+        <CardIcon name={"SupplyChainOperations / Operations Dashboard"} attached />
         <p className="layer-215" data-node-id="2025:57">
           KPI
         </p>
@@ -83,15 +76,7 @@ export default function SiliconFlowV2SupplyChainOperations() {
       </PrototypeAction>
       <PrototypeAction action="Button / Restriction Manager" className="layer-219" data-node-id="1:159" data-name="Button / Restriction Manager">
         <p className="layer-220" data-node-id="1:160">{`Restriction Manager  →`}</p>
-        <div className="layer-206" data-node-id="2025:59" data-name="Semiconductor / icon tile" />
-        <div className="layer-207" data-node-id="2025:60" data-name="Semiconductor / integrated circuit" />
-        <div className="layer-208" data-node-id="2025:61" data-name="Semiconductor / circuitry core" />
-        <div className="layer-209" data-node-id="2025:62" data-name="Semiconductor / upper pin" />
-        <div className="layer-210" data-node-id="2025:63" data-name="Semiconductor / lower pin" />
-        <div className="layer-211" data-node-id="2025:64" data-name="Semiconductor / upper pin" />
-        <div className="layer-212" data-node-id="2025:65" data-name="Semiconductor / lower pin" />
-        <div className="layer-213" data-node-id="2025:66" data-name="Semiconductor / upper pin" />
-        <div className="layer-214" data-node-id="2025:67" data-name="Semiconductor / lower pin" />
+        <CardIcon name={"SupplyChainOperations / Restriction Manager"} attached />
         <p className="layer-215" data-node-id="2025:68">
           R
         </p>
@@ -106,15 +91,7 @@ export default function SiliconFlowV2SupplyChainOperations() {
       </PrototypeAction>
       <PrototypeAction action="Button / Allocation Engine" className="layer-221" data-node-id="1:161" data-name="Button / Allocation Engine">
         <p className="layer-220" data-node-id="1:162">{`Allocation Engine  →`}</p>
-        <div className="layer-206" data-node-id="2025:70" data-name="Semiconductor / icon tile" />
-        <div className="layer-207" data-node-id="2025:71" data-name="Semiconductor / integrated circuit" />
-        <div className="layer-208" data-node-id="2025:72" data-name="Semiconductor / circuitry core" />
-        <div className="layer-209" data-node-id="2025:73" data-name="Semiconductor / upper pin" />
-        <div className="layer-210" data-node-id="2025:74" data-name="Semiconductor / lower pin" />
-        <div className="layer-211" data-node-id="2025:75" data-name="Semiconductor / upper pin" />
-        <div className="layer-212" data-node-id="2025:76" data-name="Semiconductor / lower pin" />
-        <div className="layer-213" data-node-id="2025:77" data-name="Semiconductor / upper pin" />
-        <div className="layer-214" data-node-id="2025:78" data-name="Semiconductor / lower pin" />
+        <CardIcon name={"SupplyChainOperations / Allocation Engine"} attached />
         <p className="layer-215" data-node-id="2025:79">
           CPU
         </p>
@@ -129,15 +106,7 @@ export default function SiliconFlowV2SupplyChainOperations() {
       </PrototypeAction>
       <PrototypeAction action="Button / Allocation Results" className="layer-222" data-node-id="1:163" data-name="Button / Allocation Results">
         <p className="layer-220" data-node-id="1:164">{`Allocation Results  →`}</p>
-        <div className="layer-206" data-node-id="2025:81" data-name="Semiconductor / icon tile" />
-        <div className="layer-207" data-node-id="2025:82" data-name="Semiconductor / integrated circuit" />
-        <div className="layer-208" data-node-id="2025:83" data-name="Semiconductor / circuitry core" />
-        <div className="layer-209" data-node-id="2025:84" data-name="Semiconductor / upper pin" />
-        <div className="layer-210" data-node-id="2025:85" data-name="Semiconductor / lower pin" />
-        <div className="layer-211" data-node-id="2025:86" data-name="Semiconductor / upper pin" />
-        <div className="layer-212" data-node-id="2025:87" data-name="Semiconductor / lower pin" />
-        <div className="layer-213" data-node-id="2025:88" data-name="Semiconductor / upper pin" />
-        <div className="layer-214" data-node-id="2025:89" data-name="Semiconductor / lower pin" />
+        <CardIcon name={"SupplyChainOperations / Allocation Results"} attached />
         <p className="layer-215" data-node-id="2025:90">
           OUT
         </p>
@@ -152,15 +121,7 @@ export default function SiliconFlowV2SupplyChainOperations() {
       </PrototypeAction>
       <PrototypeAction action="Button / Supply Chain Review" className="layer-223" data-node-id="1:165" data-name="Button / Supply Chain Review">
         <p className="layer-220" data-node-id="1:166">{`Supply Chain Review  →`}</p>
-        <div className="layer-206" data-node-id="2025:92" data-name="Semiconductor / icon tile" />
-        <div className="layer-207" data-node-id="2025:93" data-name="Semiconductor / integrated circuit" />
-        <div className="layer-208" data-node-id="2025:94" data-name="Semiconductor / circuitry core" />
-        <div className="layer-209" data-node-id="2025:95" data-name="Semiconductor / upper pin" />
-        <div className="layer-210" data-node-id="2025:96" data-name="Semiconductor / lower pin" />
-        <div className="layer-211" data-node-id="2025:97" data-name="Semiconductor / upper pin" />
-        <div className="layer-212" data-node-id="2025:98" data-name="Semiconductor / lower pin" />
-        <div className="layer-213" data-node-id="2025:99" data-name="Semiconductor / upper pin" />
-        <div className="layer-214" data-node-id="2025:100" data-name="Semiconductor / lower pin" />
+        <CardIcon name={"SupplyChainOperations / Supply Chain Review"} attached />
         <p className="layer-215" data-node-id="2025:101">
           QA
         </p>

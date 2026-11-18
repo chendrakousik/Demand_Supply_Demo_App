@@ -28,23 +28,53 @@
 .figma-frame button[data-name^="Role / "]:disabled { opacity: 0.55; }
 .figma-frame .prototype-field { padding: 0; border: 0; background: transparent; color: #14334a; }
 .figma-frame .prototype-field::placeholder { color: #8ba0b0; opacity: 1; }
+.figma-frame [data-name^="Nav / "] { --figma-copy-scale: 1.1; }
 
 /* Keep the reference coordinates at 1440px. Spread the page content into
    extra width while leaving navigation and the original artwork undistorted. */
-.figma-frame > div > * {
+.figma-frame > div > :not(.figma-icon) {
   --figma-offset: max(0, (var(--layer-x, 0) - var(--figma-rail)) / (1440 - var(--figma-rail)));
   left: calc(var(--layer-x, 0) * 1px + var(--figma-extra) * var(--figma-offset));
 }
 
-.figma-frame > div > :is(a, button, div):not(:has(> img)) {
+.figma-icon {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  --figma-label-scale: 1;
+  --figma-copy-scale: 1;
+  --figma-title-scale: 1;
+  --figma-heading-scale: 1;
+}
+
+.figma-icon--anchored {
+  position: absolute;
+  top: calc(var(--figma-icon-y) * 1px);
+  left: calc(var(--figma-icon-x) * 1px + var(--figma-extra) *
+    (var(--figma-icon-anchor) - var(--figma-rail)) / (1440 - var(--figma-rail)));
+  pointer-events: none;
+}
+
+.figma-icon-art {
+  position: absolute;
+  top: calc(var(--figma-icon-y) * -1px);
+  left: calc(var(--figma-icon-x) * -1px);
+}
+
+.figma-frame > div > :is(a, button, div):not(.figma-icon, :has(> img)) {
   --figma-stretch: clamp(0, (var(--layer-w, 0) - 95) / 5, 1) *
     clamp(0, var(--layer-x, 0) - var(--figma-rail) + 1, 1) *
     var(--layer-w, 0) / (1440 - var(--figma-rail));
   width: calc(var(--layer-w, 0) * 1px + var(--figma-extra) * var(--figma-stretch));
 }
 
-.figma-frame > div > :is(a, button) > :is([data-name="Premium / directional CTA surface"],
-  [data-name="Premium / directional CTA surface"] + p) {
+.figma-frame > div > :is(a, button) > :is(
+  [data-name="Premium / directional CTA surface"],
+  [data-name="Premium / directional CTA surface"] + p,
+  [data-name="Premium / role CTA tile"],
+  [data-name="Premium / role CTA tile"] + p,
+  [data-name^="Semiconductor icon / "],
+  [data-name^="Semiconductor icon / "] ~ [data-name^="Premium functional "]) {
   left: calc(var(--layer-x) * 1px + var(--figma-extra) * var(--figma-stretch));
 }
 
@@ -54,6 +84,22 @@
 
 .figma-frame > div > [data-name="User avatar"] + p {
   --figma-offset: max(0, (var(--layer-x) - 13 - var(--figma-rail)) / (1440 - var(--figma-rail)));
+  translate: -0.8px 0.4px;
+}
+
+.figma-frame [data-name="Premium / directional CTA surface"] + p { translate: -1px 0; }
+.figma-frame [data-name="Premium / role CTA tile"] + p { translate: -0.5px 1.5px; }
+
+.figma-frame > div > :is(.layer-5, .layer-6) {
+  --figma-offset: calc(55 / 1440);
+}
+
+.figma-frame :is(.layer-5, .layer-6, .layer-83, .layer-85, .layer-89, .layer-90, .layer-435,
+  .layer-484, .layer-486, .layer-817, .layer-818, .layer-840,
+  [data-name="Premium / directional CTA surface"] + p, [data-name="Premium / role CTA tile"] + p) {
+  --figma-copy-scale: 1;
+  --figma-title-scale: 1;
+  --figma-heading-scale: 1;
 }
 
 .figma-frame--sign-in > div > .layer-785 {

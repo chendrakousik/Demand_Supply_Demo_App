@@ -1,7 +1,54 @@
+import { CardIcon } from './figma-card-icons.js'
+import { FigmaIcon } from './figma-icon.js'
 import { PrototypeAction, PrototypeText } from '../prototype-action.js'
 
 const imgPremiumFunctionalDot = '/figma/1-167-98feb.svg';
 const imgPremiumFunctionalDot1 = '/figma/1-167-89a62.svg';
+
+export const operationsDashboardArtwork = {
+  DEM: { bounds: { x: 488, y: 336, width: 43, height: 43 }, children: <>
+        <div className="layer-248" data-node-id="2031:112" data-name="Semiconductor icon / DEM" />
+        <div className="layer-253" data-node-id="4008:49" data-name="Premium functional vector" />
+        <div className="layer-254" data-node-id="4008:50" data-name="Premium functional vector" />
+        <div className="layer-255" data-node-id="4008:51" data-name="Premium functional vector" />
+        <div className="layer-256" data-node-id="4008:52" data-name="Premium functional vector" />
+        <div className="layer-257" data-node-id="4008:53" data-name="Premium functional vector" />
+    </> },
+  SUP: { bounds: { x: 754, y: 336, width: 43, height: 43 }, children: <>
+        <div className="layer-249" data-node-id="2031:122" data-name="Semiconductor icon / SUP" />
+        <div className="layer-258" data-node-id="4008:54" data-name="Premium functional vector" />
+        <div className="layer-259" data-node-id="4008:55" data-name="Premium functional vector" />
+        <div className="layer-260" data-node-id="4008:56" data-name="Premium functional vector" />
+    </> },
+  GAP: { bounds: { x: 1020, y: 336, width: 43, height: 43 }, children: <>
+        <div className="layer-250" data-node-id="2031:132" data-name="Semiconductor icon / GAP" />
+        <div className="layer-261" data-node-id="4008:57" data-name="Premium functional dot">
+        <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
+      </div>
+        <div className="layer-262" data-node-id="4008:58" data-name="Premium functional dot">
+        <img alt="" className="layer-148" src={imgPremiumFunctionalDot1} />
+      </div>
+        <div className="layer-263" data-node-id="4008:59" data-name="Premium functional vector" />
+        <div className="layer-264" data-node-id="4008:60" data-name="Premium functional vector" />
+    </> },
+  FUL: { bounds: { x: 1286, y: 336, width: 43, height: 43 }, children: <>
+        <div className="layer-251" data-node-id="2031:142" data-name="Semiconductor icon / FUL" />
+        <div className="layer-265" data-node-id="4008:61" data-name="Premium functional vector" />
+        <div className="layer-266" data-node-id="4008:62" data-name="Premium functional vector" />
+        <div className="layer-267" data-node-id="4008:63" data-name="Premium functional vector" />
+    </> },
+  KPI: { bounds: { x: 1279, y: 537, width: 48, height: 48 }, children: <>
+        <div className="layer-252" data-node-id="2031:152" data-name="Semiconductor icon / KPI" />
+        <div className="layer-268" data-node-id="4008:64" data-name="Premium functional vector" />
+        <div className="layer-269" data-node-id="4008:65" data-name="Premium functional vector" />
+        <div className="layer-270" data-node-id="4008:66" data-name="Premium functional vector" />
+        <div className="layer-271" data-node-id="4008:67" data-name="Premium functional vector" />
+        <div className="layer-272" data-node-id="4008:68" data-name="Premium functional vector" />
+        <div className="layer-273" data-node-id="4008:69" data-name="Premium functional vector" />
+        <div className="layer-274" data-node-id="4008:70" data-name="Premium functional vector" />
+        <div className="layer-275" data-node-id="4008:71" data-name="Premium functional vector" />
+    </> },
+}
 
 export default function SiliconFlowV2OperationsDashboard() {
   return (
@@ -93,10 +140,7 @@ export default function SiliconFlowV2OperationsDashboard() {
       </p>
       <PrototypeAction action="Button / Open Allocation Planning" className="layer-239" data-node-id="1:210" data-name="Button / Open Allocation Planning">
         <p className="layer-240" data-node-id="1:211">{`Open Allocation Planning  →`}</p>
-        <div className="layer-241" data-node-id="2031:162" data-name="Semiconductor icon / PLAN" />
-        <div className="layer-242" data-node-id="4008:46" data-name="Premium functional vector" />
-        <div className="layer-243" data-node-id="4008:47" data-name="Premium functional vector" />
-        <div className="layer-244" data-node-id="4008:48" data-name="Premium functional vector" />
+        <CardIcon name={"OperationsDashboard / Open Allocation Planning"} attached />
       </PrototypeAction>
       <div className="layer-78" data-node-id="5:58" data-name="Side footer" />
       <p className="layer-79" data-node-id="5:59">
@@ -136,38 +180,11 @@ export default function SiliconFlowV2OperationsDashboard() {
       <div className="layer-245" data-node-id="2010:19" data-name="Premium / metric accent" />
       <div className="layer-246" data-node-id="2010:20" data-name="Premium / metric accent" />
       <div className="layer-247" data-node-id="2010:21" data-name="Premium / metric accent" />
-      <div className="layer-248" data-node-id="2031:112" data-name="Semiconductor icon / DEM" />
-      <div className="layer-249" data-node-id="2031:122" data-name="Semiconductor icon / SUP" />
-      <div className="layer-250" data-node-id="2031:132" data-name="Semiconductor icon / GAP" />
-      <div className="layer-251" data-node-id="2031:142" data-name="Semiconductor icon / FUL" />
-      <div className="layer-252" data-node-id="2031:152" data-name="Semiconductor icon / KPI" />
-      <div className="layer-253" data-node-id="4008:49" data-name="Premium functional vector" />
-      <div className="layer-254" data-node-id="4008:50" data-name="Premium functional vector" />
-      <div className="layer-255" data-node-id="4008:51" data-name="Premium functional vector" />
-      <div className="layer-256" data-node-id="4008:52" data-name="Premium functional vector" />
-      <div className="layer-257" data-node-id="4008:53" data-name="Premium functional vector" />
-      <div className="layer-258" data-node-id="4008:54" data-name="Premium functional vector" />
-      <div className="layer-259" data-node-id="4008:55" data-name="Premium functional vector" />
-      <div className="layer-260" data-node-id="4008:56" data-name="Premium functional vector" />
-      <div className="layer-261" data-node-id="4008:57" data-name="Premium functional dot">
-        <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
-      </div>
-      <div className="layer-262" data-node-id="4008:58" data-name="Premium functional dot">
-        <img alt="" className="layer-148" src={imgPremiumFunctionalDot1} />
-      </div>
-      <div className="layer-263" data-node-id="4008:59" data-name="Premium functional vector" />
-      <div className="layer-264" data-node-id="4008:60" data-name="Premium functional vector" />
-      <div className="layer-265" data-node-id="4008:61" data-name="Premium functional vector" />
-      <div className="layer-266" data-node-id="4008:62" data-name="Premium functional vector" />
-      <div className="layer-267" data-node-id="4008:63" data-name="Premium functional vector" />
-      <div className="layer-268" data-node-id="4008:64" data-name="Premium functional vector" />
-      <div className="layer-269" data-node-id="4008:65" data-name="Premium functional vector" />
-      <div className="layer-270" data-node-id="4008:66" data-name="Premium functional vector" />
-      <div className="layer-271" data-node-id="4008:67" data-name="Premium functional vector" />
-      <div className="layer-272" data-node-id="4008:68" data-name="Premium functional vector" />
-      <div className="layer-273" data-node-id="4008:69" data-name="Premium functional vector" />
-      <div className="layer-274" data-node-id="4008:70" data-name="Premium functional vector" />
-      <div className="layer-275" data-node-id="4008:71" data-name="Premium functional vector" />
+      <FigmaIcon {...operationsDashboardArtwork.DEM} owner={{ nodeId: "1:195", right: 548 }} />
+      <FigmaIcon {...operationsDashboardArtwork.SUP} owner={{ nodeId: "1:198", right: 814 }} />
+      <FigmaIcon {...operationsDashboardArtwork.GAP} owner={{ nodeId: "1:201", right: 1080 }} />
+      <FigmaIcon {...operationsDashboardArtwork.FUL} owner={{ nodeId: "1:204", right: 1346 }} />
+      <FigmaIcon {...operationsDashboardArtwork.KPI} owner={{ nodeId: "1:207", right: 1344 }} />
     </div>
   );
 }

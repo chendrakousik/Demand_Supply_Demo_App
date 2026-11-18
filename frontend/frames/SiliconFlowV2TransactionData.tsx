@@ -1,4 +1,21 @@
+import { CardIcon } from './figma-card-icons.js'
+import { FigmaIcon } from './figma-icon.js'
 import { PrototypeAction, PrototypeUpload, PrototypeText } from '../prototype-action.js'
+
+export const transactionDataArtwork = {
+  DEM: { bounds: { x: 733, y: 373, width: 48, height: 48 }, children: <>
+        <div className="layer-191" data-node-id="2031:82" data-name="Semiconductor icon / DEM" />
+        <div className="layer-193" data-node-id="4008:40" data-name="Premium functional vector" />
+        <div className="layer-194" data-node-id="4008:41" data-name="Premium functional vector" />
+        <div className="layer-195" data-node-id="4008:42" data-name="Premium functional vector" />
+    </> },
+  SUP: { bounds: { x: 1263, y: 373, width: 48, height: 48 }, children: <>
+        <div className="layer-192" data-node-id="2031:92" data-name="Semiconductor icon / SUP" />
+        <div className="layer-196" data-node-id="4008:43" data-name="Premium functional vector" />
+        <div className="layer-197" data-node-id="4008:44" data-name="Premium functional vector" />
+        <div className="layer-198" data-node-id="4008:45" data-name="Premium functional vector" />
+    </> },
+}
 
 export default function SiliconFlowV2TransactionData() {
   return (
@@ -54,10 +71,7 @@ export default function SiliconFlowV2TransactionData() {
       </PrototypeText>
       <PrototypeAction action="Button / Continue to Allocation Engine" className="layer-185" data-node-id="1:126" data-name="Button / Continue to Allocation Engine">
         <p className="layer-186" data-node-id="1:127">{`Continue to Allocation Engine  →`}</p>
-        <div className="layer-187" data-node-id="2031:102" data-name="Semiconductor icon / GO" />
-        <div className="layer-188" data-node-id="4008:37" data-name="Premium functional vector" />
-        <div className="layer-189" data-node-id="4008:38" data-name="Premium functional vector" />
-        <div className="layer-190" data-node-id="4008:39" data-name="Premium functional vector" />
+        <CardIcon name={"TransactionData / Continue to Allocation Engine"} attached />
       </PrototypeAction>
       <div className="layer-78" data-node-id="5:34" data-name="Side footer" />
       <p className="layer-79" data-node-id="5:35">
@@ -94,14 +108,8 @@ export default function SiliconFlowV2TransactionData() {
       <p className="layer-94" data-node-id="2010:12">
         SEMICONDUCTOR SUPPLY INTELLIGENCE
       </p>
-      <div className="layer-191" data-node-id="2031:82" data-name="Semiconductor icon / DEM" />
-      <div className="layer-192" data-node-id="2031:92" data-name="Semiconductor icon / SUP" />
-      <div className="layer-193" data-node-id="4008:40" data-name="Premium functional vector" />
-      <div className="layer-194" data-node-id="4008:41" data-name="Premium functional vector" />
-      <div className="layer-195" data-node-id="4008:42" data-name="Premium functional vector" />
-      <div className="layer-196" data-node-id="4008:43" data-name="Premium functional vector" />
-      <div className="layer-197" data-node-id="4008:44" data-name="Premium functional vector" />
-      <div className="layer-198" data-node-id="4008:45" data-name="Premium functional vector" />
+      <FigmaIcon {...transactionDataArtwork.DEM} owner={{ nodeId: "1:118", right: 798 }} />
+      <FigmaIcon {...transactionDataArtwork.SUP} owner={{ nodeId: "1:122", right: 1328 }} />
     </div>
   );
 }

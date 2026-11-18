@@ -17,6 +17,8 @@ Create a separate database, warehouse, service identity and RSA key per environm
 
 The API uses Snowflake for all live writes. Restrict initial deployment to one API replica. Sessions, mutation coordination and job polling are local to that process. A restart invalidates sessions, resumes queued jobs and marks interrupted running jobs failed. Before scaling horizontally, move sessions and job claims to a shared store and enforce idempotency across workers. The demo query implementation reads table data before filtering and is sized for the supplied MVP fixtures.
 
+Apply `005_transaction_reset_grants.sql` with an authorized Snowflake role to enable **Clear Demand & Supply** for app Admins. The confirmation shows current row counts, including seeded rows. The reset clears both input tables in one transaction and preserves upload history and saved runs. The same CSV can be loaded again after a reset.
+
 ## Managed sign-in
 
 Select an OIDC provider with a confidential web client, a hosted email flow and federated Google and Microsoft connections. Set the issuer, client credentials and HTTPS application origin at runtime. Register `APP_ORIGIN/api/auth/callback` as the callback. Map the provider's signed role claim to an array of `Admin`, `Data`, `Planner`, or `BA`. Configure the provider-specific URL query parameters for each connection in `OIDC_*_PARAMETERS`. Passwords are entered at the provider. Application logout clears the local session.

@@ -23,6 +23,7 @@ export function FigmaLayout({ children, tools, sidebar, signIn }: {
   }, [])
 
   const zoom = Math.min(1, size.width / referenceWidth, size.height / referenceHeight) || 1
+  const textBoost = Math.min(0.1, (1 - zoom) * 0.4)
   const designWidth = Math.max(referenceWidth, size.width / zoom)
   const rail = sidebar === 'expanded' ? 260 : sidebar === 'compact' ? 95 : 0
   const shellStyle = { '--sidebar-width': `${rail * zoom}px` } as CSSProperties
@@ -32,6 +33,10 @@ export function FigmaLayout({ children, tools, sidebar, signIn }: {
     zoom,
     '--figma-extra': `${designWidth - referenceWidth}px`,
     '--figma-rail': rail,
+    '--figma-label-scale': 1.22 + textBoost,
+    '--figma-copy-scale': 1.16 + textBoost,
+    '--figma-title-scale': 1.08 + textBoost / 3,
+    '--figma-heading-scale': 1.05 + textBoost / 5,
   } as CSSProperties
 
   return <div className={sidebar ? 'figma-shell figma-shell--' + sidebar : 'figma-shell'} style={shellStyle}>

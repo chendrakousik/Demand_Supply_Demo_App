@@ -1,3 +1,4 @@
+import { CardIcon } from './figma-card-icons.js'
 import { PrototypeAction, PrototypeText } from '../prototype-action.js'
 
 const imgPremiumSemiconductorPhotography = '/figma/1-20-ca67f.png';
@@ -40,15 +41,7 @@ export default function SiliconFlowV2DataManagement() {
       </p>
       <PrototypeAction action="Button / Master Data" className="layer-58" data-node-id="1:41" data-name="Button / Master Data">
         <p className="layer-59" data-node-id="1:42">{`Master Data  →`}</p>
-        <div className="layer-60" data-node-id="2025:26" data-name="Semiconductor / icon tile" />
-        <div className="layer-61" data-node-id="2025:27" data-name="Semiconductor / integrated circuit" />
-        <div className="layer-62" data-node-id="2025:28" data-name="Semiconductor / circuitry core" />
-        <div className="layer-63" data-node-id="2025:29" data-name="Semiconductor / upper pin" />
-        <div className="layer-64" data-node-id="2025:30" data-name="Semiconductor / lower pin" />
-        <div className="layer-65" data-node-id="2025:31" data-name="Semiconductor / upper pin" />
-        <div className="layer-66" data-node-id="2025:32" data-name="Semiconductor / lower pin" />
-        <div className="layer-67" data-node-id="2025:33" data-name="Semiconductor / upper pin" />
-        <div className="layer-68" data-node-id="2025:34" data-name="Semiconductor / lower pin" />
+        <CardIcon name={"DataManagement / Master Data"} attached />
         <p className="layer-69" data-node-id="2025:35">
           MD
         </p>
@@ -63,15 +56,7 @@ export default function SiliconFlowV2DataManagement() {
       </PrototypeAction>
       <PrototypeAction action="Button / Transaction Data" className="layer-73" data-node-id="1:43" data-name="Button / Transaction Data">
         <p className="layer-74" data-node-id="1:44">{`Transaction Data  →`}</p>
-        <div className="layer-60" data-node-id="2025:37" data-name="Semiconductor / icon tile" />
-        <div className="layer-61" data-node-id="2025:38" data-name="Semiconductor / integrated circuit" />
-        <div className="layer-62" data-node-id="2025:39" data-name="Semiconductor / circuitry core" />
-        <div className="layer-63" data-node-id="2025:40" data-name="Semiconductor / upper pin" />
-        <div className="layer-64" data-node-id="2025:41" data-name="Semiconductor / lower pin" />
-        <div className="layer-65" data-node-id="2025:42" data-name="Semiconductor / upper pin" />
-        <div className="layer-66" data-node-id="2025:43" data-name="Semiconductor / lower pin" />
-        <div className="layer-67" data-node-id="2025:44" data-name="Semiconductor / upper pin" />
-        <div className="layer-68" data-node-id="2025:45" data-name="Semiconductor / lower pin" />
+        <CardIcon name={"DataManagement / Transaction Data"} attached />
         <p className="layer-69" data-node-id="2025:46">
           CSV
         </p>
