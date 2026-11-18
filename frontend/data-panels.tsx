@@ -85,7 +85,7 @@ export function BatchPanel({ batch }: { batch?: Batch }) {
     </section>}
     {batches?.length === 0 && !batch && <p>No upload batches yet.</p>}
     {batches?.filter(row => row.id !== batch?.id).map(row => <details key={row.id}>
-      <summary>{row.type} · {row.status} · {row.accepted} accepted · {row.rejected} rejected</summary>
+      <summary>{row.type} · {row.status} · {row.accepted} accepted · {row.rejected} rejected{row.clearedAt && row.accepted > 0 ? ' · cleared from Transaction Data' : ''}</summary>
       <ul>{row.errors.map(({ row, message }, index) => <li key={index}>Row {row}: {message}</li>)}</ul>
     </details>)}
   </>

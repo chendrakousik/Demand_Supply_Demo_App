@@ -84,6 +84,32 @@ for (const table of ['products', 'customers'] as const) {
   })
 }
 
+async function transactionResetPreview() {
+  const [demand, supply] = await Promise.all([store.read('demand'), store.read('supply')])
+  const sortedRows = (rows: (Demand | Supply)[]) => rows.sort((left, right) => left.id.localeCompare(right.id))
+  const token = createHash('sha256').update(JSON.stringify([sortedRows(demand), sortedRows(supply)])).digest('hex')
+  return { demand: demand.length, supply: supply.length, token }
+}
+
+app.get('/api/data/transactions/reset', allow('admin'), async (_req, res) => {
+  res.json(await mutate(transactionResetPreview))
+})
+app.post('/api/data/transactions/reset', allow('admin'), async (req, res) => {
+  if (typeof req.body?.token !== 'string') return res.status(400).json({ error: 'Review the row counts before confirming.' })
+  const preview = await mutate(async () => {
+    const current = await transactionResetPreview()
+    if (current.token !== req.body.token) return
+    if (current.demand || current.supply) {
+      const clearedAt = new Date().toISOString()
+      const batches = (await store.read('batches')).filter(batch => !batch.clearedAt)
+      await store.clearTransactions(batches.map(batch => ({ ...batch, clearedAt })))
+    }
+    return current
+  })
+  if (!preview) return res.status(409).json({ error: 'Demand or supply changed. Reopen the confirmation to review the latest counts.' })
+  res.json({ demand: preview.demand, supply: preview.supply })
+})
+
 for (const type of ['demand', 'supply'] as const) {
   app.get('/api/uploads/' + type + '/template', allow('data.read'), (_req, res) => {
     res.type('text/csv').attachment(type + '-template.csv').send(headers[type].join(',') + '\r\n')
@@ -93,9 +119,11 @@ for (const type of ['demand', 'supply'] as const) {
     if (!csv) return res.status(400).json({ error: 'A text/csv file is required' })
     const session = current(req)!
     const batch = await mutate(async () => {
-      const id = createHash('sha256').update(JSON.stringify([session.subject, type, csv])).digest('hex')
-      const previous = (await store.read('batches')).find(row => row.id === id)
+      const uploadKey = createHash('sha256').update(JSON.stringify([session.subject, type, csv])).digest('hex')
+      const batches = await store.read('batches')
+      const previous = batches.find(row => !row.clearedAt && (row.uploadKey ?? row.id) === uploadKey)
       if (previous) return previous
+      const id = batches.some(row => row.id === uploadKey) ? randomUUID() : uploadKey
       const [products, customers, locations, existing] = await Promise.all([
         store.read('products'), store.read('customers'), store.read('locations'), store.read(type),
       ])
@@ -111,7 +139,7 @@ for (const type of ['demand', 'supply'] as const) {
       } catch (error) {
         errors = [{ row: 1, message: error instanceof Error ? error.message : 'Invalid CSV' }]
       }
-      const record: Batch = { id, type, status: rows.length ? 'loaded' : 'rejected', createdAt: new Date().toISOString(),
+      const record: Batch = { id, uploadKey, type, status: rows.length ? 'loaded' : 'rejected', createdAt: new Date().toISOString(),
         createdBy: session.subject, accepted: rows.length, rejected: errors.length, errors }
       const data = type === 'demand' ? { table: type, rows: rows as Demand[] } as const : { table: type, rows: rows as Supply[] } as const
       await store.write([data, { table: 'batches', rows: [record] }])

@@ -1,0 +1,124 @@
+.figma-shell {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 100dvh;
+}
+
+.figma-shell--expanded {
+  background: linear-gradient(to right, #101e31 var(--sidebar-width), #f3f8fc var(--sidebar-width));
+}
+
+.figma-shell--compact::after {
+  position: absolute;
+  inset: 0 auto 0 var(--sidebar-width);
+  border-left: 1px solid #d9e6ef;
+  pointer-events: none;
+  content: '';
+}
+
+.figma-shell > .workspace-tools { margin-inline-start: var(--sidebar-width); }
+.figma-viewport { min-width: 0; overflow: hidden; }
+.figma-frame { position: relative; }
+
+:where(.figma-frame button) { padding: 0; border: 0; background: transparent; color: inherit; text-align: left; }
+.figma-frame a { color: inherit; text-decoration: none; }
+.figma-frame button[data-name^="Role / "][aria-pressed="false"] { border-color: #c7e2ea; }
+.figma-frame button[data-name^="Role / "][aria-pressed="true"] { border-color: #00a5ba; box-shadow: inset 0 0 0 2px #00a5ba; }
+.figma-frame button[data-name^="Role / "]:disabled { opacity: 0.55; }
+.figma-frame .prototype-field { padding: 0; border: 0; background: transparent; color: #14334a; }
+.figma-frame .prototype-field::placeholder { color: #8ba0b0; opacity: 1; }
+.figma-frame [data-name^="Nav / "] { --figma-copy-scale: 1.1; }
+
+/* Keep the reference coordinates at 1440px. Spread the page content into
+   extra width while leaving navigation and the original artwork undistorted. */
+.figma-frame > div > :not(.figma-icon) {
+  --figma-offset: max(0, (var(--layer-x, 0) - var(--figma-rail)) / (1440 - var(--figma-rail)));
+  left: calc(var(--layer-x, 0) * 1px + var(--figma-extra) * var(--figma-offset));
+}
+
+.figma-icon {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  --figma-label-scale: 1;
+  --figma-copy-scale: 1;
+  --figma-title-scale: 1;
+  --figma-heading-scale: 1;
+}
+
+.figma-icon--anchored {
+  position: absolute;
+  top: calc(var(--figma-icon-y) * 1px);
+  left: calc(var(--figma-icon-x) * 1px + var(--figma-extra) *
+    (var(--figma-icon-anchor) - var(--figma-rail)) / (1440 - var(--figma-rail)));
+  pointer-events: none;
+}
+
+.figma-icon-art {
+  position: absolute;
+  top: calc(var(--figma-icon-y) * -1px);
+  left: calc(var(--figma-icon-x) * -1px);
+}
+
+.figma-frame > div > :is(a, button, div):not(.figma-icon, :has(> img)) {
+  --figma-stretch: clamp(0, (var(--layer-w, 0) - 95) / 5, 1) *
+    clamp(0, var(--layer-x, 0) - var(--figma-rail) + 1, 1) *
+    var(--layer-w, 0) / (1440 - var(--figma-rail));
+  width: calc(var(--layer-w, 0) * 1px + var(--figma-extra) * var(--figma-stretch));
+}
+
+.figma-frame > div > :is(a, button) > :is(
+  [data-name="Premium / directional CTA surface"],
+  [data-name="Premium / directional CTA surface"] + p,
+  [data-name="Premium / role CTA tile"],
+  [data-name="Premium / role CTA tile"] + p,
+  [data-name^="Semiconductor icon / "],
+  [data-name^="Semiconductor icon / "] ~ [data-name^="Premium functional "]) {
+  left: calc(var(--layer-x) * 1px + var(--figma-extra) * var(--figma-stretch));
+}
+
+.figma-frame > div > [data-name="Premium / Semiconductor photography"] {
+  left: calc(var(--layer-x) * 1px + var(--figma-extra));
+}
+
+.figma-frame > div > [data-name="User avatar"] + p {
+  --figma-offset: max(0, (var(--layer-x) - 13 - var(--figma-rail)) / (1440 - var(--figma-rail)));
+  translate: -0.8px 0.4px;
+}
+
+.figma-frame [data-name="Premium / directional CTA surface"] + p { translate: -1px 0; }
+.figma-frame [data-name="Premium / role CTA tile"] + p { translate: -0.5px 1.5px; }
+
+.figma-frame > div > :is(.layer-5, .layer-6) {
+  --figma-offset: calc(55 / 1440);
+}
+
+.figma-frame :is(.layer-5, .layer-6, .layer-83, .layer-85, .layer-89, .layer-90, .layer-435,
+  .layer-484, .layer-486, .layer-817, .layer-818, .layer-840,
+  [data-name="Premium / directional CTA surface"] + p, [data-name="Premium / role CTA tile"] + p) {
+  --figma-copy-scale: 1;
+  --figma-title-scale: 1;
+  --figma-heading-scale: 1;
+}
+
+.figma-frame--sign-in > div > .layer-785 {
+  width: calc(664px + var(--figma-extra) * (664 / 1440));
+}
+
+.figma-frame > div > :is(.layer-45, .layer-785, .layer-786) { height: 100%; }
+
+.figma-frame--sign-in > div > :is(.layer-816, .layer-817, .layer-818) {
+  --figma-offset: calc(62 / 1440);
+}
+
+.figma-frame--sign-in :is(.layer-835, .layer-841, .layer-847) {
+  left: calc(var(--layer-x) * 1px + var(--figma-extra) * var(--figma-stretch) / 2);
+}
+
+.figma-frame--sign-in > div > :is([data-name^="Brand / circuit"], [data-name^="Brand / horizontal"],
+  [data-name="Brand / semiconductor die"], [data-name="Brand / processor core"],
+  [data-name="Brand / left contact"], [data-name="Brand / right contact"]) {
+  left: calc(var(--layer-x) * 1px + var(--figma-extra) * (332 / 1440));
+  width: calc(var(--layer-w) * 1px);
+}

@@ -1,7 +1,39 @@
+import { FigmaIcon } from './figma-icon.js'
 import { PrototypeAction, PrototypeText } from '../prototype-action.js'
 
 const imgPremiumFunctionalDot = '/figma/1-347-98feb.svg';
 const imgPremiumFunctionalDot1 = '/figma/1-347-89a62.svg';
+
+export const supplyChainReviewArtwork = {
+  FUL: { bounds: { x: 570, y: 331, width: 43, height: 43 }, children: <>
+        <div className="layer-390" data-node-id="2031:272" data-name="Semiconductor icon / FUL" />
+        <div className="layer-394" data-node-id="4008:111" data-name="Premium functional dot">
+        <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
+      </div>
+        <div className="layer-395" data-node-id="4008:112" data-name="Premium functional dot">
+        <img alt="" className="layer-148" src={imgPremiumFunctionalDot1} />
+      </div>
+        <div className="layer-396" data-node-id="4008:113" data-name="Premium functional vector" />
+        <div className="layer-397" data-node-id="4008:114" data-name="Premium functional vector" />
+    </> },
+  GAP: { bounds: { x: 924, y: 331, width: 43, height: 43 }, children: <>
+        <div className="layer-391" data-node-id="2031:282" data-name="Semiconductor icon / GAP" />
+        <div className="layer-398" data-node-id="4008:115" data-name="Premium functional vector" />
+        <div className="layer-399" data-node-id="4008:116" data-name="Premium functional vector" />
+        <div className="layer-400" data-node-id="4008:117" data-name="Premium functional vector" />
+    </> },
+  RISK: { bounds: { x: 1278, y: 331, width: 43, height: 43 }, children: <>
+        <div className="layer-392" data-node-id="2031:292" data-name="Semiconductor icon / RISK" />
+        <div className="layer-401" data-node-id="4008:118" data-name="Premium functional vector" />
+        <div className="layer-402" data-node-id="4008:119" data-name="Premium functional vector" />
+    </> },
+  REV: { bounds: { x: 1277, y: 544, width: 48, height: 48 }, children: <>
+        <div className="layer-393" data-node-id="2031:302" data-name="Semiconductor icon / REV" />
+        <div className="layer-403" data-node-id="4008:120" data-name="Premium functional vector" />
+        <div className="layer-404" data-node-id="4008:121" data-name="Premium functional vector" />
+        <div className="layer-405" data-node-id="4008:122" data-name="Premium functional vector" />
+    </> },
+}
 
 export default function SiliconFlowV2SupplyChainReview() {
   return (
@@ -109,26 +141,10 @@ export default function SiliconFlowV2SupplyChainReview() {
       </p>
       <div className="layer-388" data-node-id="2010:35" data-name="Premium / metric accent" />
       <div className="layer-389" data-node-id="2010:36" data-name="Premium / metric accent" />
-      <div className="layer-390" data-node-id="2031:272" data-name="Semiconductor icon / FUL" />
-      <div className="layer-391" data-node-id="2031:282" data-name="Semiconductor icon / GAP" />
-      <div className="layer-392" data-node-id="2031:292" data-name="Semiconductor icon / RISK" />
-      <div className="layer-393" data-node-id="2031:302" data-name="Semiconductor icon / REV" />
-      <div className="layer-394" data-node-id="4008:111" data-name="Premium functional dot">
-        <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
-      </div>
-      <div className="layer-395" data-node-id="4008:112" data-name="Premium functional dot">
-        <img alt="" className="layer-148" src={imgPremiumFunctionalDot1} />
-      </div>
-      <div className="layer-396" data-node-id="4008:113" data-name="Premium functional vector" />
-      <div className="layer-397" data-node-id="4008:114" data-name="Premium functional vector" />
-      <div className="layer-398" data-node-id="4008:115" data-name="Premium functional vector" />
-      <div className="layer-399" data-node-id="4008:116" data-name="Premium functional vector" />
-      <div className="layer-400" data-node-id="4008:117" data-name="Premium functional vector" />
-      <div className="layer-401" data-node-id="4008:118" data-name="Premium functional vector" />
-      <div className="layer-402" data-node-id="4008:119" data-name="Premium functional vector" />
-      <div className="layer-403" data-node-id="4008:120" data-name="Premium functional vector" />
-      <div className="layer-404" data-node-id="4008:121" data-name="Premium functional vector" />
-      <div className="layer-405" data-node-id="4008:122" data-name="Premium functional vector" />
+      <FigmaIcon {...supplyChainReviewArtwork.FUL} owner={{ nodeId: "1:375", right: 630 }} />
+      <FigmaIcon {...supplyChainReviewArtwork.GAP} owner={{ nodeId: "1:377", right: 984 }} />
+      <FigmaIcon {...supplyChainReviewArtwork.RISK} owner={{ nodeId: "1:379", right: 1338 }} />
+      <FigmaIcon {...supplyChainReviewArtwork.REV} owner={{ nodeId: "1:381", right: 1342 }} />
     </div>
   );
 }

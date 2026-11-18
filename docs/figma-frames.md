@@ -1,6 +1,6 @@
 # Figma screen inventory
 
-Desktop reference: 1440 × 900, Inter Regular/Bold. Compact entries are alternate sidebar states. Assets are stored in `public/figma`.
+The desktop reference is 1440 × 900 in Inter Regular/Bold. Desktop routes reuse the original Figma layers and adapt their placement to available space. Narrow windows use stacked layouts. The reference assets are stored in `public/figma`.
 
 | Node | Route | Sidebar | Assets |
 | --- | --- | --- | --- |

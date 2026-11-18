@@ -3,10 +3,15 @@ import { createRoot } from 'react-dom/client'
 import '@fontsource/inter/400.css'
 import '@fontsource/inter/700.css'
 import './styles.css'
+import './frames/responsive.css'
 import './frames/layers.css'
+import './frames/figma-layout.css'
 import { api, json, type Batch, type Role, type Run, type RunSummary, type Session } from './api.js'
 import { BatchPanel, DataPanel, ResultsPanel, type Resource } from './data-panels.js'
 import { frames } from './frames/index.js'
+import { desktopFrames } from './frames/desktop-frames.js'
+import { FigmaLayout } from './frames/figma-layout.js'
+import { WorkspaceLayout } from './frames/workspace-layout.js'
 import { PrototypeInteraction } from './prototype-action.js'
 
 const destinations: Record<string, string> = {
@@ -23,8 +28,11 @@ const titles: Record<Resource, string> = {
 }
 const formatNumber = (value: number) => value.toLocaleString('en-US')
 const percent = (value: number) => (value * 100).toFixed(1) + '%'
-type Panel = Resource | 'batches' | 'results' | 'scope'
+const desktopLayout = window.matchMedia('(min-width: 960px)')
+type Panel = Resource | 'batches' | 'results' | 'scope' | 'reset'
 type Summary = { products: number; customers: number; demand: number; supply: number; source: string }
+type ResetCounts = { demand: number; supply: number }
+type ResetPreview = ResetCounts & { token: string }
 
 function readRoute() {
   return window.location.pathname.replace(/\/$/, '') || '/'
@@ -42,6 +50,7 @@ function signInFor(path: string) {
 
 function App() {
   const [path, setPath] = useState(readRoute)
+  const [desktop, setDesktop] = useState(desktopLayout.matches)
   const [compact, setCompact] = useState(false)
   const [session, setSession] = useState<Session | null>()
   const [demo, setDemo] = useState(false)
@@ -49,12 +58,14 @@ function App() {
   const [error, setError] = useState('')
   const [panel, setPanel] = useState<Panel>()
   const [batch, setBatch] = useState<Batch>()
+  const [resetPreview, setResetPreview] = useState<ResetPreview>()
+  const [resetError, setResetError] = useState('')
+  const [resetting, setResetting] = useState(false)
   const [summary, setSummary] = useState<Summary>()
   const [runs, setRuns] = useState<RunSummary[]>([])
   const [runId, setRunId] = useState('')
   const [run, setRun] = useState<Run>()
   const [running, setRunning] = useState(false)
-  const [width, setWidth] = useState(window.innerWidth)
   const dialog = useRef<HTMLDialogElement>(null)
   const email = useRef('')
   const lastWorkspace = useRef('')
@@ -62,6 +73,12 @@ function App() {
   const actionInFlight = useRef(false)
   const canWrite = session?.role === 'Admin' || session?.role === 'Data'
   const canPlan = session?.role === 'Admin' || session?.role === 'Planner'
+
+  useEffect(() => {
+    const resize = () => setDesktop(desktopLayout.matches)
+    desktopLayout.addEventListener('change', resize)
+    return () => desktopLayout.removeEventListener('change', resize)
+  }, [])
 
   const navigate = useCallback((url: string, replace = false) => {
     if (replace) window.history.replaceState(null, '', url)
@@ -76,15 +93,12 @@ function App() {
   const readSummary = useCallback(() => api<Summary>('/data/summary').then(setSummary), [])
   useEffect(() => {
     const onPop = () => { setPath(readRoute()); setPanel(undefined) }
-    const onResize = () => setWidth(window.innerWidth)
     window.addEventListener('popstate', onPop)
-    window.addEventListener('resize', onResize)
     api<{ demo: boolean }>('/config').then(result => setDemo(result.demo), failure => setError(failure.message))
     readSession().catch(failure => { setError(failure.message); setSession(null) })
     const timer = window.setInterval(() => { void readSession().catch(() => undefined) }, 30000)
     return () => {
       window.removeEventListener('popstate', onPop)
-      window.removeEventListener('resize', onResize)
       window.clearInterval(timer)
     }
   }, [readSession])
@@ -98,6 +112,16 @@ function App() {
   useEffect(() => {
     if (role && path.startsWith('/data')) readSummary().catch(failure => setError(failure.message))
   }, [path, role, readSummary])
+
+  useEffect(() => {
+    if (panel !== 'reset') return
+    const controller = new AbortController()
+    api<ResetPreview>('/data/transactions/reset', { signal: controller.signal }).then(
+      value => { if (!controller.signal.aborted) setResetPreview(value) },
+      failure => { if (!controller.signal.aborted) setResetError(failure.message) },
+    )
+    return () => controller.abort()
+  }, [panel])
 
   useEffect(() => {
     if (!role || !path.startsWith('/operations') || role === 'Data') return
@@ -215,10 +239,27 @@ function App() {
       const value = await response.json()
       if (!response.ok && response.status !== 422) throw new Error(value.error || 'Upload failed')
       setBatch(value as Batch)
-      setPanel('batches')
+      setPanel(current => current === 'reset' ? current : 'batches')
       void readSummary().catch(failure => setError(failure.message))
     } catch (failure) { setError((failure as Error).message) }
     finally { setNotice('') }
+  }
+
+  async function clearTransactions() {
+    if (!resetPreview || resetting) return
+    setResetting(true)
+    setResetError('')
+    try {
+      const cleared = await api<ResetCounts>('/data/transactions/reset', json('POST', { token: resetPreview.token }))
+      setBatch(undefined)
+      setPanel(undefined)
+      setNotice(`Cleared ${formatNumber(cleared.demand)} demand and ${formatNumber(cleared.supply)} supply rows.`)
+      void readSummary().catch(failure => setError(failure.message))
+    } catch (failure) {
+      setResetError((failure as Error).message)
+    } finally {
+      setResetting(false)
+    }
   }
 
   function layerText(key: string, sample: ReactNode) {
@@ -245,44 +286,68 @@ function App() {
     return sample
   }
 
-  const frame = frames.find(frame => frame.route === path && frame.compact === compact) ?? frames.find(frame => frame.route === path)
+  const frame = frames.find(frame => frame.route === path)
   const Component = frame?.component
+  const desktopFrame = desktopFrames.find(frame => frame.route === path && frame.compact === compact)
+    ?? desktopFrames.find(frame => frame.route === path)
+  const DesktopComponent = desktopFrame?.component
   const display = (session !== undefined || path === '/' || path.startsWith('/sign-in')) && allowed(path, session ?? null)
-  const zoom = Math.min(1, Math.max(0.68, width / 1440))
+  const tools = session && (frame?.title || path === '/roles') && <aside className="workspace-tools" aria-label="Workspace actions">
+    <span>{session.name} · {session.role}{demo ? ' · Local demo' : ''}</span>
+    {summary && path.startsWith('/data') && <span>{summary.source} · {summary.products} products · {summary.customers} customers · {summary.demand} demand · {summary.supply} supply</span>}
+    {path === '/data/transactions' && <>
+      <a href="/api/uploads/demand/template">Demand template</a><a href="/api/uploads/supply/template">Supply template</a>
+      <button onClick={() => setPanel('demand')}>Demand records</button><button onClick={() => setPanel('supply')}>Supply records</button>
+      <button onClick={() => setPanel('batches')}>Upload history</button>
+      {role === 'Admin' && <button className="danger-action" onClick={() => {
+        setResetPreview(undefined)
+        setResetError('')
+        setError('')
+        setNotice('')
+        setPanel('reset')
+      }}>Clear Demand &amp; Supply</button>}
+    </>}
+    {path === '/operations/restrictions' && <button onClick={() => setPanel('restrictions')}>Allocation restrictions</button>}
+    {path.startsWith('/operations') && run && <span role="status">Allocation: {run.status}{run.error ? ' · ' + run.error : ''}</span>}
+    {['/operations/results', '/operations/review', '/operations/dashboard'].includes(path) && <>
+      {!!runs.length && <label>Run <select value={runId || runs[0].id} onChange={event => setRunId(event.target.value)}>
+        {runs.map(row => <option key={row.id} value={row.id}>{new Date(row.createdAt).toLocaleString()} · {row.status} · {row.id.slice(0, 8)}</option>)}
+      </select></label>}
+      <button onClick={() => setPanel('results')}>Detailed results</button>
+    </>}
+    <button onClick={() => {
+      void api('/session/logout', json('POST')).then(() => { setSession(null); setRun(undefined); setRunId(''); setRuns([]); setSummary(undefined); setBatch(undefined); navigate('/') }, failure => setError(failure.message))
+    }}>Sign out</button>
+  </aside>
   return <PrototypeInteraction.Provider value={{ href: destination, enabled, activate: action => void activate(action), text: layerText, demo,
     upload: (type, file) => void upload(type, file), role, email: value => { email.current = value } }}>
-    {Component && display ? <>
-      <main className="canvas-viewport" aria-label="SiliconFlow workspace">
-        <div className="canvas" style={{ zoom }}><Component /></div>
-      </main>
-      {session && path !== '/' && !path.startsWith('/sign-in') && <aside className="workspace-tools" aria-label="Workspace actions">
-        <span>{session.name} · {session.role}{demo ? ' · Local demo' : ''}</span>
-        {summary && path.startsWith('/data') && <span>{summary.source} · {summary.products} products · {summary.customers} customers · {summary.demand} demand · {summary.supply} supply</span>}
-        {path === '/data/transactions' && <>
-          <a href="/api/uploads/demand/template">Demand template</a><a href="/api/uploads/supply/template">Supply template</a>
-          <button onClick={() => setPanel('demand')}>Demand records</button><button onClick={() => setPanel('supply')}>Supply records</button>
-          <button onClick={() => setPanel('batches')}>Upload history</button>
-        </>}
-        {path === '/operations/restrictions' && <button onClick={() => setPanel('restrictions')}>Allocation restrictions</button>}
-        {path.startsWith('/operations') && run && <span role="status">Allocation: {run.status}{run.error ? ' · ' + run.error : ''}</span>}
-        {['/operations/results', '/operations/review', '/operations/dashboard'].includes(path) && <>
-          {!!runs.length && <label>Run <select value={runId || runs[0].id} onChange={event => setRunId(event.target.value)}>
-            {runs.map(row => <option key={row.id} value={row.id}>{new Date(row.createdAt).toLocaleString()} · {row.status} · {row.id.slice(0, 8)}</option>)}
-          </select></label>}
-          <button onClick={() => setPanel('results')}>Detailed results</button>
-        </>}
-        <button onClick={() => {
-          void api('/session/logout', json('POST')).then(() => { setSession(null); setRun(undefined); setRunId(''); setRuns([]); setSummary(undefined); setBatch(undefined); navigate('/') }, failure => setError(failure.message))
-        }}>Sign out</button>
-      </aside>}
-    </> : <main className="route-message">
+    {Component && display ? (
+      desktop && DesktopComponent
+        ? <FigmaLayout tools={tools} sidebar={frame.title ? compact ? 'compact' : 'expanded' : undefined}
+            signIn={path.startsWith('/sign-in')}><DesktopComponent /></FigmaLayout>
+        : frame.title
+        ? <WorkspaceLayout title={frame.title} compact={compact} data={path.startsWith('/data')} tools={tools}><Component /></WorkspaceLayout>
+        : <div className="public-shell"><Component />{tools}</div>
+    ) : <main className="route-message">
       <h1>{session === undefined ? 'Loading workspace…' : Component ? 'Access denied' : 'Page not found'}</h1>
       <a href="/">Return to Home</a>
     </main>}
     {(notice || error) && <div className="notification" role={error ? 'alert' : 'status'}>{error || notice}</div>}
-    <dialog ref={dialog} aria-labelledby="panel-title" onClose={() => setPanel(undefined)}>
-      <header><h2 id="panel-title">{panel === 'batches' ? 'Upload batches' : panel === 'results' ? 'Allocation results' : panel === 'scope' ? 'Pending workflow' : panel ? titles[panel] : ''}</h2>
-        <button onClick={() => setPanel(undefined)} aria-label="Close">Close</button></header>
+    <dialog ref={dialog} aria-labelledby="panel-title" onClose={() => setPanel(undefined)}
+      onCancel={event => { if (resetting) event.preventDefault() }}>
+      <header><h2 id="panel-title">{panel === 'reset' ? 'Clear Demand & Supply?' : panel === 'batches' ? 'Upload batches' : panel === 'results' ? 'Allocation results' : panel === 'scope' ? 'Pending workflow' : panel ? titles[panel] : ''}</h2>
+        <button disabled={resetting} onClick={() => setPanel(undefined)}>{panel === 'reset' ? 'Cancel' : 'Close'}</button></header>
+      {panel === 'reset' && <>
+        {resetError && <p role="alert">{resetError}</p>}
+        {!resetPreview && !resetError && <p role="status">Checking demand and supply counts…</p>}
+        {resetPreview && (resetPreview.demand || resetPreview.supply ? <>
+          <p>Permanently remove <strong>{formatNumber(resetPreview.demand)} demand rows</strong> and <strong>{formatNumber(resetPreview.supply)} supply rows</strong>, including demo records.</p>
+          <p>Upload history and saved allocation results are preserved.</p>
+          <button className="danger-action" disabled={resetting || !!resetError} onClick={() => void clearTransactions()}>
+            {resetting ? 'Clearing…' : 'Clear All Demand & Supply'}
+          </button>
+        </> : <p>Demand and supply are already empty.</p>)}
+      </>}
       {panel === 'batches' && <BatchPanel batch={batch} />}
       {panel === 'results' && <ResultsPanel run={run} />}
       {panel === 'scope' && <p>This workflow is awaiting scope approval.</p>}

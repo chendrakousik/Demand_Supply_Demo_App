@@ -1,4 +1,14 @@
+import { FigmaIcon } from './figma-icon.js'
 import { PrototypeAction, PrototypeText } from '../prototype-action.js'
+
+export const allocationResultsArtwork = {
+  RPT: { bounds: { x: 1277, y: 331, width: 48, height: 48 }, children: <>
+        <div className="layer-375" data-node-id="2031:242" data-name="Semiconductor icon / RPT" />
+        <div className="layer-376" data-node-id="4008:108" data-name="Premium functional vector" />
+        <div className="layer-377" data-node-id="4008:109" data-name="Premium functional vector" />
+        <div className="layer-378" data-node-id="4008:110" data-name="Premium functional vector" />
+    </> },
+}
 
 export default function SiliconFlowV2AllocationResults() {
   return (
@@ -178,10 +188,7 @@ export default function SiliconFlowV2AllocationResults() {
       <p className="layer-94" data-node-id="2010:31">
         SEMICONDUCTOR SUPPLY INTELLIGENCE
       </p>
-      <div className="layer-375" data-node-id="2031:242" data-name="Semiconductor icon / RPT" />
-      <div className="layer-376" data-node-id="4008:108" data-name="Premium functional vector" />
-      <div className="layer-377" data-node-id="4008:109" data-name="Premium functional vector" />
-      <div className="layer-378" data-node-id="4008:110" data-name="Premium functional vector" />
+      <FigmaIcon {...allocationResultsArtwork.RPT} owner={{ nodeId: "1:317", right: 1342 }} />
     </div>
   );
 }

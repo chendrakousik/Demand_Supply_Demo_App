@@ -36,6 +36,7 @@ export type Run = {
 export type Batch = {
   id: string; type: 'demand' | 'supply'; status: 'loaded' | 'rejected'; createdAt: string; createdBy: string
   accepted: number; rejected: number; errors: { row: number; message: string }[]
+  uploadKey?: string; clearedAt?: string
 }
 
 export const headers = {

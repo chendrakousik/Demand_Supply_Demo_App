@@ -1,3 +1,4 @@
+import { FigmaIcon } from './figma-icon.js'
 import { PrototypeAction, PrototypeText } from '../prototype-action.js'
 
 export default function SiliconFlowV2AllocationResultsCompact() {
@@ -162,10 +163,12 @@ export default function SiliconFlowV2AllocationResultsCompact() {
       <p className="layer-491" data-node-id="2010:68">
         SEMICONDUCTOR SUPPLY INTELLIGENCE
       </p>
-      <div className="layer-725" data-node-id="2031:592" data-name="Semiconductor icon / RPT" />
-      <div className="layer-726" data-node-id="4008:245" data-name="Premium functional vector" />
-      <div className="layer-727" data-node-id="4008:246" data-name="Premium functional vector" />
-      <div className="layer-728" data-node-id="4008:247" data-name="Premium functional vector" />
+      <FigmaIcon bounds={{ x: 1112, y: 331, width: 48, height: 48 }} owner={{ nodeId: "13:491", right: 1177 }}>
+        <div className="layer-725" data-node-id="2031:592" data-name="Semiconductor icon / RPT" />
+        <div className="layer-726" data-node-id="4008:245" data-name="Premium functional vector" />
+        <div className="layer-727" data-node-id="4008:246" data-name="Premium functional vector" />
+        <div className="layer-728" data-node-id="4008:247" data-name="Premium functional vector" />
+      </FigmaIcon>
     </div>
   );
 }

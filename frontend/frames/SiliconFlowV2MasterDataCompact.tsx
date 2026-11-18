@@ -1,3 +1,4 @@
+import { FigmaIcon } from './figma-icon.js'
 import { PrototypeAction } from '../prototype-action.js'
 
 const imgPremiumFunctionalDot = '/figma/13-74-d728a.svg';
@@ -137,67 +138,83 @@ export default function SiliconFlowV2MasterDataCompact() {
       <p className="layer-491" data-node-id="2010:46">
         SEMICONDUCTOR SUPPLY INTELLIGENCE
       </p>
-      <div className="layer-527" data-node-id="2031:352" data-name="Semiconductor icon / SKU" />
-      <div className="layer-528" data-node-id="2031:362" data-name="Semiconductor icon / CUS" />
-      <div className="layer-529" data-node-id="2031:372" data-name="Semiconductor icon / FAB" />
-      <div className="layer-530" data-node-id="2031:382" data-name="Semiconductor icon / MAP" />
-      <div className="layer-531" data-node-id="2031:392" data-name="Semiconductor icon / PRI" />
-      <div className="layer-532" data-node-id="2031:402" data-name="Semiconductor icon / POL" />
-      <div className="layer-533" data-node-id="2031:412" data-name="Semiconductor icon / CAL" />
-      <div className="layer-534" data-node-id="2031:422" data-name="Semiconductor icon / LT" />
-      <div className="layer-535" data-node-id="4008:139" data-name="Premium functional vector" />
-      <div className="layer-536" data-node-id="4008:140" data-name="Premium functional vector" />
-      <div className="layer-537" data-node-id="4008:141" data-name="Premium functional vector" />
-      <div className="layer-538" data-node-id="4008:142" data-name="Premium functional vector" />
-      <div className="layer-539" data-node-id="4008:143" data-name="Premium functional vector" />
-      <div className="layer-540" data-node-id="4008:144" data-name="Premium functional vector" />
-      <div className="layer-541" data-node-id="4008:145" data-name="Premium functional vector" />
-      <div className="layer-542" data-node-id="4008:146" data-name="Premium functional vector" />
-      <div className="layer-543" data-node-id="4008:147" data-name="Premium functional dot">
+      <FigmaIcon bounds={{ x: 324, y: 330, width: 43, height: 43 }} owner={{ nodeId: "13:95", right: 384 }}>
+        <div className="layer-527" data-node-id="2031:352" data-name="Semiconductor icon / SKU" />
+        <div className="layer-535" data-node-id="4008:139" data-name="Premium functional vector" />
+        <div className="layer-536" data-node-id="4008:140" data-name="Premium functional vector" />
+        <div className="layer-537" data-node-id="4008:141" data-name="Premium functional vector" />
+        <div className="layer-538" data-node-id="4008:142" data-name="Premium functional vector" />
+        <div className="layer-539" data-node-id="4008:143" data-name="Premium functional vector" />
+        <div className="layer-540" data-node-id="4008:144" data-name="Premium functional vector" />
+        <div className="layer-541" data-node-id="4008:145" data-name="Premium functional vector" />
+        <div className="layer-542" data-node-id="4008:146" data-name="Premium functional vector" />
+      </FigmaIcon>
+      <FigmaIcon bounds={{ x: 591, y: 330, width: 43, height: 43 }} owner={{ nodeId: "13:99", right: 651 }}>
+        <div className="layer-528" data-node-id="2031:362" data-name="Semiconductor icon / CUS" />
+        <div className="layer-543" data-node-id="4008:147" data-name="Premium functional dot">
         <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
       </div>
-      <div className="layer-544" data-node-id="4008:148" data-name="Premium functional dot">
+        <div className="layer-544" data-node-id="4008:148" data-name="Premium functional dot">
         <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
       </div>
-      <div className="layer-545" data-node-id="4008:149" data-name="Premium functional vector" />
-      <div className="layer-546" data-node-id="4008:150" data-name="Premium functional vector" />
-      <div className="layer-547" data-node-id="4008:151" data-name="Premium functional vector" />
-      <div className="layer-548" data-node-id="4008:152" data-name="Premium functional vector" />
-      <div className="layer-549" data-node-id="4008:153" data-name="Premium functional vector" />
-      <div className="layer-550" data-node-id="4008:154" data-name="Premium functional vector" />
-      <div className="layer-551" data-node-id="4008:155" data-name="Premium functional vector" />
-      <div className="layer-552" data-node-id="4008:156" data-name="Premium functional dot">
+        <div className="layer-545" data-node-id="4008:149" data-name="Premium functional vector" />
+        <div className="layer-546" data-node-id="4008:150" data-name="Premium functional vector" />
+      </FigmaIcon>
+      <FigmaIcon bounds={{ x: 858, y: 330, width: 43, height: 43 }} owner={{ nodeId: "13:103", right: 918 }}>
+        <div className="layer-529" data-node-id="2031:372" data-name="Semiconductor icon / FAB" />
+        <div className="layer-547" data-node-id="4008:151" data-name="Premium functional vector" />
+        <div className="layer-548" data-node-id="4008:152" data-name="Premium functional vector" />
+        <div className="layer-549" data-node-id="4008:153" data-name="Premium functional vector" />
+        <div className="layer-550" data-node-id="4008:154" data-name="Premium functional vector" />
+        <div className="layer-551" data-node-id="4008:155" data-name="Premium functional vector" />
+      </FigmaIcon>
+      <FigmaIcon bounds={{ x: 1125, y: 330, width: 43, height: 43 }} owner={{ nodeId: "13:107", right: 1185 }}>
+        <div className="layer-530" data-node-id="2031:382" data-name="Semiconductor icon / MAP" />
+        <div className="layer-552" data-node-id="4008:156" data-name="Premium functional dot">
         <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
       </div>
-      <div className="layer-553" data-node-id="4008:157" data-name="Premium functional dot">
+        <div className="layer-553" data-node-id="4008:157" data-name="Premium functional dot">
         <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
       </div>
-      <div className="layer-554" data-node-id="4008:158" data-name="Premium functional dot">
+        <div className="layer-554" data-node-id="4008:158" data-name="Premium functional dot">
         <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
       </div>
-      <div className="layer-555" data-node-id="4008:159" data-name="Premium functional vector" />
-      <div className="layer-556" data-node-id="4008:160" data-name="Premium functional vector" />
-      <div className="layer-557" data-node-id="4008:161" data-name="Premium functional vector" />
-      <div className="layer-558" data-node-id="4008:162" data-name="Premium functional vector" />
-      <div className="layer-559" data-node-id="4008:163" data-name="Premium functional vector" />
-      <div className="layer-560" data-node-id="4008:164" data-name="Premium functional vector" />
-      <div className="layer-561" data-node-id="4008:165" data-name="Premium functional vector" />
-      <div className="layer-562" data-node-id="4008:166" data-name="Premium functional vector" />
-      <div className="layer-563" data-node-id="4008:167" data-name="Premium functional vector" />
-      <div className="layer-564" data-node-id="4008:168" data-name="Premium functional dot">
+        <div className="layer-555" data-node-id="4008:159" data-name="Premium functional vector" />
+        <div className="layer-556" data-node-id="4008:160" data-name="Premium functional vector" />
+      </FigmaIcon>
+      <FigmaIcon bounds={{ x: 324, y: 517, width: 43, height: 43 }} owner={{ nodeId: "13:111", right: 384 }}>
+        <div className="layer-531" data-node-id="2031:392" data-name="Semiconductor icon / PRI" />
+        <div className="layer-557" data-node-id="4008:161" data-name="Premium functional vector" />
+        <div className="layer-558" data-node-id="4008:162" data-name="Premium functional vector" />
+        <div className="layer-559" data-node-id="4008:163" data-name="Premium functional vector" />
+      </FigmaIcon>
+      <FigmaIcon bounds={{ x: 591, y: 517, width: 43, height: 43 }} owner={{ nodeId: "13:115", right: 651 }}>
+        <div className="layer-532" data-node-id="2031:402" data-name="Semiconductor icon / POL" />
+        <div className="layer-560" data-node-id="4008:164" data-name="Premium functional vector" />
+        <div className="layer-561" data-node-id="4008:165" data-name="Premium functional vector" />
+      </FigmaIcon>
+      <FigmaIcon bounds={{ x: 858, y: 517, width: 43, height: 43 }} owner={{ nodeId: "13:119", right: 918 }}>
+        <div className="layer-533" data-node-id="2031:412" data-name="Semiconductor icon / CAL" />
+        <div className="layer-562" data-node-id="4008:166" data-name="Premium functional vector" />
+        <div className="layer-563" data-node-id="4008:167" data-name="Premium functional vector" />
+        <div className="layer-564" data-node-id="4008:168" data-name="Premium functional dot">
         <img alt="" className="layer-148" src={imgPremiumFunctionalDot1} />
       </div>
-      <div className="layer-565" data-node-id="4008:169" data-name="Premium functional dot">
+        <div className="layer-565" data-node-id="4008:169" data-name="Premium functional dot">
         <img alt="" className="layer-148" src={imgPremiumFunctionalDot1} />
       </div>
-      <div className="layer-566" data-node-id="4008:170" data-name="Premium functional dot">
+      </FigmaIcon>
+      <FigmaIcon bounds={{ x: 1125, y: 517, width: 43, height: 43 }} owner={{ nodeId: "13:123", right: 1185 }}>
+        <div className="layer-534" data-node-id="2031:422" data-name="Semiconductor icon / LT" />
+        <div className="layer-566" data-node-id="4008:170" data-name="Premium functional dot">
         <img alt="" className="layer-148" src={imgPremiumFunctionalDot2} />
       </div>
-      <div className="layer-567" data-node-id="4008:171" data-name="Premium functional dot">
+        <div className="layer-567" data-node-id="4008:171" data-name="Premium functional dot">
         <img alt="" className="layer-148" src={imgPremiumFunctionalDot3} />
       </div>
-      <div className="layer-568" data-node-id="4008:172" data-name="Premium functional vector" />
-      <div className="layer-569" data-node-id="4008:173" data-name="Premium functional vector" />
+        <div className="layer-568" data-node-id="4008:172" data-name="Premium functional vector" />
+        <div className="layer-569" data-node-id="4008:173" data-name="Premium functional vector" />
+      </FigmaIcon>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { FigmaIcon } from './figma-icon.js'
 import { PrototypeAction, PrototypeText } from '../prototype-action.js'
 
 const imgPremiumFunctionalDot = '/figma/13-404-5592e.svg';
@@ -98,15 +99,17 @@ export default function SiliconFlowV2AllocationEngineCompact() {
         SEMICONDUCTOR SUPPLY INTELLIGENCE
       </p>
       <div className="layer-690" data-node-id="2010:65" data-name="Premium / engine indicator" />
-      <div className="layer-691" data-node-id="2031:572" data-name="Semiconductor icon / CPU" />
-      <div className="layer-692" data-node-id="4008:235" data-name="Premium functional dot">
+      <FigmaIcon bounds={{ x: 1114, y: 329, width: 48, height: 48 }} owner={{ nodeId: "13:433", right: 1179 }}>
+        <div className="layer-691" data-node-id="2031:572" data-name="Semiconductor icon / CPU" />
+        <div className="layer-692" data-node-id="4008:235" data-name="Premium functional dot">
         <img alt="" className="layer-148" src={imgPremiumFunctionalDot} />
       </div>
-      <div className="layer-693" data-node-id="4008:236" data-name="Premium functional dot">
+        <div className="layer-693" data-node-id="4008:236" data-name="Premium functional dot">
         <img alt="" className="layer-148" src={imgPremiumFunctionalDot1} />
       </div>
-      <div className="layer-694" data-node-id="4008:237" data-name="Premium functional vector" />
-      <div className="layer-695" data-node-id="4008:238" data-name="Premium functional vector" />
+        <div className="layer-694" data-node-id="4008:237" data-name="Premium functional vector" />
+        <div className="layer-695" data-node-id="4008:238" data-name="Premium functional vector" />
+      </FigmaIcon>
     </div>
   );
 }

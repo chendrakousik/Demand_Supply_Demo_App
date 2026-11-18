@@ -1,3 +1,4 @@
+import { CardIcon } from './figma-card-icons.js'
 import { PrototypeAction } from '../prototype-action.js'
 
 const imgPanel = '/figma/1-2-e54be.png';
@@ -33,15 +34,7 @@ export default function SiliconFlowV2Home() {
       </p>
       <PrototypeAction action="Button / Data Management" className="layer-16" data-node-id="1:16" data-name="Button / Data Management">
         <p className="layer-17" data-node-id="1:17">{`Data Management  →`}</p>
-        <div className="layer-18" data-node-id="2025:2" data-name="Semiconductor / icon tile" />
-        <div className="layer-19" data-node-id="2025:3" data-name="Semiconductor / integrated circuit" />
-        <div className="layer-20" data-node-id="2025:4" data-name="Semiconductor / circuitry core" />
-        <div className="layer-21" data-node-id="2025:5" data-name="Semiconductor / upper pin" />
-        <div className="layer-22" data-node-id="2025:6" data-name="Semiconductor / lower pin" />
-        <div className="layer-23" data-node-id="2025:7" data-name="Semiconductor / upper pin" />
-        <div className="layer-24" data-node-id="2025:8" data-name="Semiconductor / lower pin" />
-        <div className="layer-25" data-node-id="2025:9" data-name="Semiconductor / upper pin" />
-        <div className="layer-26" data-node-id="2025:10" data-name="Semiconductor / lower pin" />
+        <CardIcon name={"Home / Data Management"} attached />
         <p className="layer-27" data-node-id="2025:11">
           DB
         </p>
@@ -57,15 +50,7 @@ export default function SiliconFlowV2Home() {
       </PrototypeAction>
       <PrototypeAction action="Button / Supply Chain Operations" className="layer-33" data-node-id="1:18" data-name="Button / Supply Chain Operations">
         <p className="layer-34" data-node-id="1:19">{`Supply Chain Operations  →`}</p>
-        <div className="layer-18" data-node-id="2025:14" data-name="Semiconductor / icon tile" />
-        <div className="layer-19" data-node-id="2025:15" data-name="Semiconductor / integrated circuit" />
-        <div className="layer-20" data-node-id="2025:16" data-name="Semiconductor / circuitry core" />
-        <div className="layer-21" data-node-id="2025:17" data-name="Semiconductor / upper pin" />
-        <div className="layer-22" data-node-id="2025:18" data-name="Semiconductor / lower pin" />
-        <div className="layer-23" data-node-id="2025:19" data-name="Semiconductor / upper pin" />
-        <div className="layer-24" data-node-id="2025:20" data-name="Semiconductor / lower pin" />
-        <div className="layer-25" data-node-id="2025:21" data-name="Semiconductor / upper pin" />
-        <div className="layer-26" data-node-id="2025:22" data-name="Semiconductor / lower pin" />
+        <CardIcon name={"Home / Supply Chain Operations"} attached />
         <p className="layer-27" data-node-id="2025:23">
           SC
         </p>
